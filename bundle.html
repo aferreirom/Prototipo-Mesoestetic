@@ -1,0 +1,4423 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>MesoPatch — Mesoestetic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <style>
+/* ═══════════════════════════════════════════════════
+   MESOPATCH — MEDICAL GRADE DESIGN SYSTEM
+   Mesoestetic © 2026
+════════════════════════════════════════════════════ */
+
+/* ── TOKENS ──────────────────────────────────────── */
+:root {
+  --bg: #FAFAF8;
+  --bg-deep: #FFFFFF;
+  --surface: #F4F2EE;
+  --surface-2: #EDEBE6;
+  --surface-3: #E4E0D8;
+  --border: #D9D5CC;
+  --border-light: #C9C4BA;
+
+  --accent: #C4A35A;
+  --accent-dim: rgba(196, 163, 90, 0.12);
+  --accent-glow: rgba(196, 163, 90, 0.25);
+  --violet: #8B7355;
+  --violet-dim: rgba(139, 115, 85, 0.15);
+  --teal: #6B8E7F;
+
+  --text-1: #1C1814;
+  --text-2: #5C5449;
+  --text-3: #9C9088;
+
+  --green: #22C55E;
+  --green-dim: rgba(34, 197, 94, 0.15);
+  --green-glow: rgba(34, 197, 94, 0.25);
+  --yellow: #D97706;
+  --yellow-dim: rgba(217, 119, 6, 0.12);
+  --red: #DC2626;
+  --red-dim: rgba(220, 38, 38, 0.12);
+
+  --radius-sm: 8px;
+  --radius: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+
+  --font: 'Inter', system-ui, sans-serif;
+  --font-display: 'Space Grotesk', 'Inter', sans-serif;
+
+  --nav-h: 72px;
+  --header-h: 64px;
+  --status-h: 28px;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* ── RESET ───────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg-deep);
+  color: var(--text-1);
+  min-height: 100%;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  font-family: var(--font);
+  background: none;
+  color: inherit;
+}
+
+/* ═══════════════════════════════════════════════════
+   APP SHELL
+════════════════════════════════════════════════════ */
+#app {
+  width: 100%;
+  max-width: 430px;
+  height: 100dvh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+
+  /* Phone border for demo */
+  box-shadow:
+    0 0 0 1px rgba(0, 198, 255, 0.08),
+    0 0 80px rgba(0, 198, 255, 0.06),
+    0 32px 80px rgba(0, 0, 0, 0.9);
+}
+
+/* ── STATUS BAR ──────────────────────────────────── */
+.status-bar {
+  height: var(--status-h);
+  background: var(--bg-deep);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  flex-shrink: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.status-time {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.status-brand {
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  opacity: 0.7;
+}
+
+.status-icons {
+  display: flex;
+  gap: 6px;
+  font-size: 9px;
+  color: var(--text-3);
+  letter-spacing: -1px;
+}
+
+/* ── APP HEADER ──────────────────────────────────── */
+.app-header {
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  flex-shrink: 0;
+  background: linear-gradient(180deg, rgba(14, 20, 32, 0.98) 0%, rgba(14, 20, 32, 0.85) 100%);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  z-index: 10;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-back {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-3);
+  color: var(--text-2);
+  transition: all 0.2s;
+}
+
+.btn-back:hover {
+  background: var(--border-light);
+  color: var(--text-1);
+}
+
+.btn-back.hidden {
+  display: none;
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brand-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent-glow);
+  animation: brandPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes brandPulse {
+
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 8px var(--accent-glow);
+  }
+
+  50% {
+    opacity: 0.6;
+    box-shadow: 0 0 16px var(--accent-glow);
+  }
+}
+
+.brand-name {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: -0.3px;
+  color: var(--text-1);
+}
+
+.brand-name strong {
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.patch-status-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--green-dim);
+  border: 1px solid rgba(34, 197, 94, 0.25);
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--green);
+}
+
+.pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.pulse-dot-small {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.4);
+    opacity: 0.7;
+  }
+}
+
+.btn-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--violet-dim);
+  border: 1px solid rgba(123, 110, 246, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--violet);
+  transition: all 0.2s;
+}
+
+.btn-avatar:hover {
+  background: var(--violet-dim);
+  border-color: var(--violet);
+}
+
+/* ═══════════════════════════════════════════════════
+   SCREEN CONTAINER & SCREENS
+════════════════════════════════════════════════════ */
+.screen-container {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.screen {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  padding: 20px 20px 100px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(30px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  scrollbar-width: none;
+}
+
+.screen::-webkit-scrollbar {
+  display: none;
+}
+
+.screen.active {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateX(0);
+}
+
+.screen.slide-out {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+/* ── SCREEN TITLE SECTION ────────────────────────── */
+.screen-title-section {
+  margin-bottom: 20px;
+}
+
+.screen-title {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin-bottom: 4px;
+}
+
+.screen-subtitle {
+  font-size: 13px;
+  color: var(--text-3);
+}
+
+/* ── SECTION HEADERS ─────────────────────────────── */
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 24px 0 12px;
+}
+
+.section-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-2);
+  letter-spacing: 0.02em;
+}
+
+.btn-more {
+  font-size: 12px;
+  color: var(--accent);
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+
+.btn-more:hover {
+  opacity: 0.7;
+}
+
+/* ═══════════════════════════════════════════════════
+   HOME DASHBOARD
+════════════════════════════════════════════════════ */
+
+/* GREETING */
+.greeting-section {
+  margin-bottom: 24px;
+  padding-top: 4px;
+}
+
+.greeting-sub {
+  font-size: 13px;
+  color: var(--text-3);
+  margin-bottom: 2px;
+}
+
+.greeting-name {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin-bottom: 4px;
+}
+
+.greeting-date {
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+/* PATCH READING CARD */
+.patch-reading-card {
+  background: linear-gradient(135deg, #0E1420 0%, #131929 100%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.2s;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.patch-reading-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--violet));
+}
+
+.patch-reading-card:hover {
+  border-color: var(--accent-glow);
+  transform: translateY(-1px);
+}
+
+.patch-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.patch-card-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-3);
+  font-weight: 500;
+}
+
+.patch-icon {
+  font-size: 16px;
+}
+
+.patch-card-time {
+  font-size: 11px;
+  color: var(--text-3);
+}
+
+.patch-absorption-display {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.absorption-value {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+}
+
+.absorption-number {
+  font-family: var(--font-display);
+  font-size: 56px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+  text-shadow: 0 0 30px var(--accent-glow);
+}
+
+.absorption-unit {
+  font-size: 20px;
+  color: var(--accent);
+  opacity: 0.6;
+}
+
+.absorption-meta {
+  flex: 1;
+}
+
+.absorption-label {
+  font-size: 12px;
+  color: var(--text-3);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.absorption-bar-wrap {
+  height: 6px;
+  background: var(--surface-3);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+
+.absorption-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--violet));
+  border-radius: 3px;
+  transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.absorption-rate {
+  font-size: 11px;
+  color: var(--text-3);
+}
+
+/* METRICS GRID */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.metric-card {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 12px;
+  transition: border-color 0.2s, transform 0.2s;
+  cursor: default;
+}
+
+.metric-card:hover {
+  transform: translateY(-2px);
+}
+
+.metric-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.metric-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hydration-icon {
+  background: var(--accent-dim);
+  color: var(--accent);
+}
+
+.barrier-icon {
+  background: var(--yellow-dim);
+  color: var(--yellow);
+}
+
+.irritation-icon {
+  background: var(--green-dim);
+  color: var(--green);
+}
+
+.semaphore-badge {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  border-radius: 4px;
+  padding: 2px 5px;
+}
+
+.semaphore-badge.green {
+  background: var(--green-dim);
+  color: var(--green);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.semaphore-badge.yellow {
+  background: var(--yellow-dim);
+  color: var(--yellow);
+  border: 1px solid rgba(234, 179, 8, 0.3);
+}
+
+.semaphore-badge.red {
+  background: var(--red-dim);
+  color: var(--red);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.metric-value {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.metric-value small {
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0.6;
+}
+
+.metric-label {
+  display: block;
+  font-size: 10px;
+  color: var(--text-3);
+  margin-bottom: 8px;
+}
+
+.metric-bar-track {
+  height: 4px;
+  background: var(--surface-3);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+
+.metric-bar {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.metric-delta {
+  font-size: 9px;
+  font-weight: 600;
+}
+
+/* COLORS */
+.green-text {
+  color: var(--green);
+}
+
+.yellow-text {
+  color: var(--yellow);
+}
+
+.red-text {
+  color: var(--red);
+}
+
+.accent-text {
+  color: var(--accent);
+}
+
+/* ALERT BANNER */
+.alert-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  border-radius: var(--radius);
+  padding: 14px;
+  margin-top: 16px;
+  border: 1px solid;
+}
+
+.yellow-alert {
+  background: var(--yellow-dim);
+  border-color: rgba(234, 179, 8, 0.3);
+}
+
+.red-alert {
+  background: var(--red-dim);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.alert-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.alert-content {
+  flex: 1;
+}
+
+.alert-title {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+
+.alert-body {
+  font-size: 11px;
+  color: var(--text-2);
+  line-height: 1.4;
+}
+
+.alert-cta {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  flex-shrink: 0;
+  padding: 0 4px;
+  align-self: center;
+}
+
+/* SESSION TRACK */
+.session-track {
+  margin-bottom: 4px;
+}
+
+.session-count {
+  font-size: 12px;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.session-dots {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.session-dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--surface-3);
+  border: 1.5px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-3);
+  transition: all 0.3s;
+}
+
+.session-dot.done {
+  background: var(--accent-dim);
+  border-color: rgba(0, 198, 255, 0.4);
+  color: var(--accent);
+}
+
+.session-dot.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #000;
+  box-shadow: 0 0 16px var(--accent-glow);
+}
+
+.session-progress-bar {
+  height: 4px;
+  background: var(--surface-3);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.session-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--violet));
+  border-radius: 2px;
+  transition: width 1.5s ease;
+}
+
+/* NEXT ACTIONS */
+.next-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.action-btn-primary {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--accent);
+  color: #000;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: var(--radius);
+  padding: 13px 16px;
+  transition: all 0.2s;
+  box-shadow: 0 4px 20px rgba(0, 198, 255, 0.25);
+}
+
+.action-btn-primary:hover {
+  background: #22D1FF;
+  transform: translateY(-1px);
+}
+
+.action-btn-secondary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text-2);
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: var(--radius);
+  padding: 13px 16px;
+  transition: all 0.2s;
+}
+
+.action-btn-secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ═══════════════════════════════════════════════════
+   MESOPATCSH SCAN SCREEN
+════════════════════════════════════════════════════ */
+.face-map-container {
+  text-align: center;
+}
+
+.face-map-legend {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: var(--text-3);
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.green-dot {
+  background: var(--green);
+}
+
+.yellow-dot {
+  background: var(--yellow);
+}
+
+.red-dot {
+  background: var(--red);
+}
+
+.face-svg-wrap {
+  display: inline-block;
+  width: 200px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 12px;
+  margin-bottom: 14px;
+}
+
+.face-svg {
+  width: 100%;
+}
+
+.face-zone {
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.face-zone:hover {
+  opacity: 0.8;
+}
+
+.zone-label {
+  font-family: var(--font);
+  font-weight: 600;
+}
+
+.zone-detail-panel {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  margin-bottom: 8px;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.zone-detail-hint {
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+.zone-detail-content {
+  width: 100%;
+}
+
+.zone-detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.zone-detail-name {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.zone-metrics-row {
+  display: flex;
+  gap: 16px;
+}
+
+.zone-metric {
+  font-size: 11px;
+  color: var(--text-3);
+}
+
+.zone-metric span {
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-1);
+  margin-bottom: 1px;
+}
+
+.zone-cards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.zone-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.zone-card:active {
+  transform: scale(0.98);
+}
+
+.zone-card-red {
+  border-left: 3px solid var(--red);
+}
+
+.zone-card-yellow {
+  border-left: 3px solid var(--yellow);
+}
+
+.zone-card-green {
+  border-left: 3px solid var(--green);
+}
+
+.zone-card-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.zone-card-body {
+  flex: 1;
+}
+
+.zone-card-name {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.zone-card-status {
+  font-size: 11px;
+  color: var(--text-3);
+}
+
+.zone-card-action {
+  color: var(--text-3);
+  font-size: 14px;
+}
+
+/* ═══════════════════════════════════════════════════
+   INTELLIGENT ROUTINE SCREEN
+════════════════════════════════════════════════════ */
+.ampm-toggle-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.ampm-toggle {
+  display: flex;
+  background: var(--surface-3);
+  border-radius: 12px;
+  padding: 4px;
+  gap: 4px;
+}
+
+.ampm-btn {
+  padding: 8px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-3);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.25s;
+}
+
+.ampm-btn.active {
+  background: var(--accent);
+  color: #000;
+  box-shadow: 0 2px 12px rgba(0, 198, 255, 0.3);
+}
+
+.ampm-icon {
+  font-size: 14px;
+}
+
+.routine-alert-tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--yellow);
+  font-weight: 500;
+}
+
+.alert-indicator {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.yellow-pulse {
+  background: var(--yellow);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.routine-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.routine-step {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transition: all 0.3s;
+  animation: slideInUp 0.3s ease both;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.routine-step.adjusted {
+  border-color: rgba(234, 179, 8, 0.3);
+  background: linear-gradient(135deg, var(--surface-2) 0%, rgba(234, 179, 8, 0.04) 100%);
+}
+
+.step-number {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--surface-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-3);
+  flex-shrink: 0;
+}
+
+.step-number.done-step {
+  background: var(--green-dim);
+  color: var(--green);
+}
+
+.step-content {
+  flex: 1;
+}
+
+.step-name {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 3px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.step-adjusted-tag {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  background: var(--yellow-dim);
+  color: var(--yellow);
+  border: 1px solid rgba(234, 179, 8, 0.3);
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+
+.step-desc {
+  font-size: 11px;
+  color: var(--text-3);
+}
+
+.step-duration {
+  font-size: 11px;
+  color: var(--text-3);
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.algo-info-card {
+  display: flex;
+  gap: 12px;
+  background: var(--violet-dim);
+  border: 1px solid rgba(123, 110, 246, 0.25);
+  border-radius: var(--radius);
+  padding: 14px;
+}
+
+.algo-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.algo-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--violet);
+  margin-bottom: 4px;
+}
+
+.algo-body {
+  font-size: 11px;
+  color: var(--text-2);
+  line-height: 1.5;
+}
+
+/* ═══════════════════════════════════════════════════
+   CLINIC SYNC SCREEN
+════════════════════════════════════════════════════ */
+.clinic-card {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  margin-bottom: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.clinic-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--teal), var(--accent));
+}
+
+.clinic-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.clinic-logo-wrap {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--teal), var(--accent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.clinic-logo {
+  font-size: 20px;
+  font-weight: 800;
+  color: #000;
+}
+
+.clinic-info {
+  flex: 1;
+}
+
+.clinic-name {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.clinic-address {
+  font-size: 11px;
+  color: var(--text-3);
+}
+
+.sync-status-badge {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 12px;
+  padding: 4px 10px;
+  flex-shrink: 0;
+}
+
+.active-badge {
+  background: var(--green-dim);
+  color: var(--green);
+  border: 1px solid rgba(34, 197, 94, 0.25);
+}
+
+.clinic-pro {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  background: var(--surface-3);
+  border-radius: var(--radius-sm);
+}
+
+.pro-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--violet), var(--accent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.pro-info {
+  flex: 1;
+}
+
+.pro-name {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.pro-role {
+  font-size: 11px;
+  color: var(--text-3);
+}
+
+.btn-message {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--accent-dim);
+  border: 1px solid var(--accent-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  transition: all 0.2s;
+}
+
+.btn-message:hover {
+  background: var(--accent);
+  color: #000;
+}
+
+.reports-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.report-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.report-card:hover {
+  border-color: var(--border-light);
+  transform: translateX(2px);
+}
+
+.report-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.accent-bg {
+  background: var(--accent-dim);
+}
+
+.teal-bg {
+  background: rgba(14, 180, 163, 0.15);
+}
+
+.purple-bg {
+  background: var(--violet-dim);
+}
+
+.green-bg {
+  background: var(--green-dim);
+}
+
+.yellow-bg {
+  background: var(--yellow-dim);
+}
+
+.red-bg {
+  background: var(--red-dim);
+}
+
+.report-body {
+  flex: 1;
+}
+
+.report-title {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.report-date {
+  font-size: 11px;
+  color: var(--text-3);
+}
+
+.report-shared-indicator {
+  flex-shrink: 0;
+}
+
+.shared-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--violet-dim);
+  border: 1.5px solid rgba(123, 110, 246, 0.4);
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--violet);
+}
+
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.stat-box {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 10px;
+  text-align: center;
+}
+
+.stat-number {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  display: block;
+  font-size: 10px;
+  color: var(--text-3);
+}
+
+.next-appt-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--accent-dim);
+  border: 1px solid rgba(0, 198, 255, 0.2);
+  border-radius: var(--radius);
+  padding: 14px;
+  margin-top: 16px;
+}
+
+.appt-icon {
+  font-size: 22px;
+}
+
+.appt-info {
+  flex: 1;
+}
+
+.appt-label {
+  font-size: 11px;
+  color: var(--text-3);
+  margin-bottom: 2px;
+}
+
+.appt-date {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.btn-confirm-appt {
+  font-size: 12px;
+  font-weight: 700;
+  background: var(--accent);
+  color: #000;
+  border-radius: var(--radius-sm);
+  padding: 7px 12px;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.btn-confirm-appt:hover {
+  background: #22D1FF;
+}
+
+/* ═══════════════════════════════════════════════════
+   BOTTOM NAVIGATION
+════════════════════════════════════════════════════ */
+.bottom-nav {
+  height: var(--nav-h);
+  background: rgba(8, 11, 18, 0.95);
+  backdrop-filter: blur(24px);
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 8px;
+  padding-bottom: var(--safe-bottom);
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 8px 8px;
+  border-radius: 12px;
+  color: var(--text-3);
+  font-size: 10px;
+  font-weight: 500;
+  transition: all 0.2s;
+  flex: 1;
+}
+
+.nav-item span {
+  transition: color 0.2s;
+}
+
+.nav-item svg {
+  transition: all 0.2s;
+}
+
+.nav-item.active {
+  color: var(--accent);
+}
+
+.nav-item.active .nav-icon-wrap svg {
+  stroke: var(--accent);
+}
+
+.nav-icon-wrap {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* CENTER FAB (Scan) */
+.nav-item-center {
+  flex: 0 0 60px;
+  position: relative;
+  top: -12px;
+}
+
+.nav-center-btn {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--violet));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(0, 198, 255, 0.35);
+  transition: all 0.2s;
+}
+
+.nav-center-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 28px rgba(0, 198, 255, 0.5);
+}
+
+.nav-item-center.active .nav-center-btn {
+  box-shadow: 0 6px 28px rgba(0, 198, 255, 0.6);
+}
+
+/* ═══════════════════════════════════════════════════
+   TOAST NOTIFICATION
+════════════════════════════════════════════════════ */
+.toast {
+  position: fixed;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--surface-3);
+  border: 1px solid var(--border-light);
+  border-radius: 20px;
+  padding: 10px 18px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-1);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  z-index: 100;
+  backdrop-filter: blur(20px);
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ═══════════════════════════════════════════════════
+   RESPONSIVE — DESKTOP DEMO VIEW
+════════════════════════════════════════════════════ */
+@media (min-width: 600px) {
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba(196, 163, 90, 0.05) 0%, transparent 60%),
+      radial-gradient(ellipse at 70% 80%, rgba(139, 115, 85, 0.04) 0%, transparent 60%),
+      #F0EDE8;
+  }
+
+  #app {
+    height: min(860px, 96dvh);
+    border-radius: 40px;
+  }
+
+  .status-bar {
+    border-radius: 40px 40px 0 0;
+  }
+
+  .bottom-nav {
+    border-radius: 0 0 40px 40px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════
+   NEW COMPONENTS — PDF v2 ALIGNMENT
+════════════════════════════════════════════════════ */
+
+/* ── Quick Actions (Home) ────────────────────────── */
+.quick-actions-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.quick-action-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 6px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-2);
+  transition: all 0.2s;
+}
+
+.quick-action-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.quick-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.violet-bg {
+  background: var(--violet-dim);
+}
+
+.teal-bg {
+  background: rgba(14, 180, 163, 0.15);
+}
+
+/* ── Sebum / Stress metrics (2-col grid) ────────── */
+.metrics-grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.metric-wide {
+  display: block;
+}
+
+.sebum-icon {
+  background: var(--yellow-dim);
+  color: var(--yellow);
+}
+
+.stress-icon {
+  background: var(--violet-dim);
+  color: var(--violet);
+}
+
+/* ── Session insight ─────────────────────────────── */
+.session-insight {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  background: var(--accent-dim);
+  border: 1px solid rgba(0, 198, 255, 0.15);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  font-size: 11px;
+  color: var(--accent);
+}
+
+.insight-icon {
+  font-size: 14px;
+}
+
+/* ── Patch signal row ────────────────────────────── */
+.patch-signal {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.green-dot-sm {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: pulse 2s infinite;
+}
+
+.signal-label {
+  font-size: 10px;
+  color: var(--green);
+  font-weight: 500;
+}
+
+/* ── Result Level Selector (Scan) ────────────────── */
+.result-level-selector {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.level-btn {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-3);
+  background: var(--surface-2);
+  transition: all 0.2s;
+}
+
+.level-btn.active {
+  background: var(--accent-dim);
+  border-color: rgba(0, 198, 255, 0.4);
+  color: var(--accent);
+}
+
+/* ── Trend Visualization ─────────────────────────── */
+.trend-selector {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.trend-btn {
+  padding: 6px 14px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-3);
+  background: var(--surface-2);
+  transition: all 0.2s;
+}
+
+.trend-btn.active {
+  background: var(--surface-3);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.trend-chart-wrap {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+  margin-bottom: 14px;
+}
+
+.trend-chart {
+  width: 100% !important;
+  height: 100px !important;
+  display: block;
+}
+
+.trend-labels {
+  display: flex;
+  gap: 16px;
+  margin-top: 8px;
+  font-size: 10px;
+  color: var(--text-3);
+}
+
+.trend-labels span::before {
+  content: '● ';
+}
+
+.trend-labels span:nth-child(1)::before {
+  color: var(--accent);
+}
+
+.trend-labels span:nth-child(2)::before {
+  color: var(--yellow);
+}
+
+.trend-labels span:nth-child(3)::before {
+  color: var(--red);
+}
+
+/* ── Signal & Calibration Card ───────────────────── */
+.signal-card {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.signal-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.signal-label-text {
+  font-size: 12px;
+  color: var(--text-3);
+  flex: 1;
+}
+
+.signal-bars {
+  display: flex;
+  gap: 3px;
+}
+
+.bar-seg {
+  width: 10px;
+  height: 14px;
+  border-radius: 2px;
+  background: var(--surface-3);
+}
+
+.bar-seg.filled {
+  background: var(--accent);
+}
+
+.signal-pct {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.chip-badge {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--green);
+  background: var(--green-dim);
+  border: 1px solid rgba(34, 197, 94, 0.25);
+  border-radius: 12px;
+  padding: 2px 10px;
+}
+
+.ble-status {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: var(--green);
+}
+
+/* ── Sensitivity Mode Bar (Routine) ──────────────── */
+.sensitivity-mode-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--yellow-dim);
+  border: 1px solid rgba(234, 179, 8, 0.25);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  font-size: 11px;
+  color: var(--yellow);
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+.section-tag {
+  font-size: 10px;
+  color: var(--violet);
+  background: var(--violet-dim);
+  border-radius: 12px;
+  padding: 2px 8px;
+}
+
+/* ── Video Tutorial Cards (Routine) ──────────────── */
+.video-tutorial-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.video-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.video-card:hover {
+  border-color: var(--border-light);
+  transform: translateX(2px);
+}
+
+.video-thumb {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.video-info {
+  flex: 1;
+}
+
+.video-title {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.video-meta {
+  font-size: 11px;
+  color: var(--text-3);
+}
+
+.video-tag {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  background: var(--accent-dim);
+  color: var(--accent);
+  border-radius: 4px;
+  padding: 2px 6px;
+  flex-shrink: 0;
+}
+
+.video-tag.adjusted {
+  background: var(--yellow-dim);
+  color: var(--yellow);
+}
+
+/* ═══════════════════════════════════════════════════
+   PROGRESS & SKIN HISTORY SCREEN
+════════════════════════════════════════════════════ */
+.before-after-card {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  margin-bottom: 8px;
+}
+
+.ba-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.ba-title {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.ba-date {
+  font-size: 11px;
+  color: var(--text-3);
+}
+
+.ba-images {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.ba-image-slot {
+  flex: 1;
+  border-radius: var(--radius);
+  overflow: hidden;
+  position: relative;
+}
+
+.ba-placeholder {
+  height: 120px;
+  background: var(--surface-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-3);
+  text-align: center;
+  line-height: 1.6;
+}
+
+.ba-placeholder.after-glow {
+  background: var(--accent-dim);
+  border-color: rgba(0, 198, 255, 0.25);
+  color: var(--accent);
+}
+
+.ba-label {
+  display: block;
+  text-align: center;
+  font-size: 10px;
+  color: var(--text-3);
+  margin-top: 6px;
+}
+
+.ba-divider {
+  font-size: 20px;
+  color: var(--text-3);
+  flex-shrink: 0;
+}
+
+.btn-add-photo {
+  width: 100%;
+  padding: 10px;
+  border: 1px dashed var(--border-light);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  transition: all 0.2s;
+}
+
+.btn-add-photo:hover {
+  background: var(--accent-dim);
+}
+
+.insights-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.insight-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border-radius: var(--radius);
+  padding: 14px;
+  border: 1px solid;
+}
+
+.accent-card {
+  background: var(--accent-dim);
+  border-color: rgba(0, 198, 255, 0.2);
+}
+
+.green-card {
+  background: var(--green-dim);
+  border-color: rgba(34, 197, 94, 0.2);
+}
+
+.yellow-card {
+  background: var(--yellow-dim);
+  border-color: rgba(234, 179, 8, 0.2);
+}
+
+.insight-num {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 700;
+  flex-shrink: 0;
+  min-width: 56px;
+}
+
+.insight-title {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.insight-sub {
+  font-size: 11px;
+  color: var(--text-3);
+}
+
+.milestones-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.milestone {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.milestone:last-child {
+  border-bottom: none;
+}
+
+.ms-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.ms-title {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.ms-date {
+  font-size: 11px;
+  color: var(--text-3);
+}
+
+.milestone.pending .ms-title {
+  color: var(--text-3);
+}
+
+.milestone.pending .ms-icon {
+  opacity: 0.4;
+}
+
+.weekly-chart-wrap {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+}
+
+/* ═══════════════════════════════════════════════════
+   SMART INVENTORY SCREEN
+════════════════════════════════════════════════════ */
+.compat-alert {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--accent-dim);
+  border: 1px solid rgba(0, 198, 255, 0.2);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 12px;
+  color: var(--text-2);
+  margin-bottom: 8px;
+}
+
+.product-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.product-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  transition: all 0.2s;
+}
+
+.product-card.low-stock {
+  border-color: rgba(239, 68, 68, 0.3);
+  background: rgba(239, 68, 68, 0.03);
+}
+
+.product-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.product-info {
+  flex: 1;
+}
+
+.product-name {
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.product-meta-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.product-stock {
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.product-stock.ok {
+  color: var(--green);
+}
+
+.product-stock.warning {
+  color: var(--yellow);
+}
+
+.product-stock.danger {
+  color: var(--red);
+}
+
+.product-expiry {
+  font-size: 10px;
+  color: var(--text-3);
+}
+
+.product-stock-bar {
+  height: 3px;
+  background: var(--surface-3);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.product-stock-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 1s ease;
+}
+
+.compat-badge {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.compat-ok {
+  background: var(--green-dim);
+  color: var(--green);
+}
+
+.compat-warn {
+  background: var(--yellow-dim);
+  color: var(--yellow);
+}
+
+.reorder-card {
+  background: var(--red-dim);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  border-radius: var(--radius);
+  padding: 14px;
+  margin-top: 16px;
+}
+
+.reorder-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.reorder-icon {
+  font-size: 22px;
+}
+
+.reorder-title {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.reorder-sub {
+  font-size: 11px;
+  color: var(--text-3);
+}
+
+.reorder-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-reorder-confirm {
+  flex: 1;
+  padding: 10px;
+  background: var(--red);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s;
+}
+
+.btn-reorder-confirm:hover {
+  background: #FF5555;
+}
+
+.btn-reorder-cancel {
+  padding: 10px 14px;
+  font-size: 12px;
+  color: var(--text-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+/* ═══════════════════════════════════════════════════
+   AI CHATBOT SCREEN
+════════════════════════════════════════════════════ */
+.chatbot-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.chatbot-messages {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 180px;
+  max-height: 260px;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.chatbot-messages::-webkit-scrollbar {
+  display: none;
+}
+
+.chat-msg {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.chat-avatar-ai {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--accent-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.chat-bubble {
+  background: var(--surface-3);
+  border: 1px solid var(--border);
+  border-radius: 0 14px 14px 14px;
+  padding: 10px 12px;
+  font-size: 12px;
+  color: var(--text-2);
+  line-height: 1.5;
+  flex: 1;
+}
+
+.chat-bubble.user-bubble {
+  background: var(--accent-dim);
+  border-color: rgba(0, 198, 255, 0.2);
+  border-radius: 14px 0 14px 14px;
+  color: var(--text-1);
+}
+
+.bubble-time {
+  display: block;
+  font-size: 10px;
+  color: var(--text-3);
+  margin-top: 4px;
+}
+
+.chat-msg.user-msg {
+  flex-direction: row-reverse;
+}
+
+.quick-questions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.qq-btn {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 6px 12px;
+  font-size: 11px;
+  color: var(--text-2);
+  transition: all 0.2s;
+}
+
+.qq-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.chat-input-row {
+  display: flex;
+  gap: 8px;
+}
+
+.chat-input {
+  flex: 1;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 11px 14px;
+  font-family: var(--font);
+  font-size: 13px;
+  color: var(--text-1);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.chat-input:focus {
+  border-color: var(--accent);
+}
+
+.chat-send-btn {
+  width: 42px;
+  height: 42px;
+  background: var(--accent);
+  color: #000;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.chat-send-btn:hover {
+  background: #22D1FF;
+}
+
+.escalation-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 10px;
+  color: var(--text-3);
+  line-height: 1.5;
+  padding: 8px 10px;
+  background: var(--surface-2);
+  border-radius: var(--radius-sm);
+}
+
+/* ═══════════════════════════════════════════════════
+   CLINIC SYNC — NEW COMPONENTS
+════════════════════════════════════════════════════ */
+.qr-link-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--accent-dim);
+  border: 1px solid rgba(0, 198, 255, 0.2);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 12px;
+  color: var(--accent);
+  font-weight: 500;
+  cursor: pointer;
+  margin-bottom: 12px;
+  transition: all 0.2s;
+}
+
+.qr-link-bar:hover {
+  background: rgba(0, 198, 255, 0.2);
+}
+
+.qr-arrow {
+  margin-left: auto;
+}
+
+.pro-notes-card {
+  background: var(--violet-dim);
+  border: 1px solid rgba(123, 110, 246, 0.25);
+  border-radius: var(--radius);
+  padding: 14px;
+  margin-bottom: 8px;
+}
+
+.pro-notes-label {
+  font-size: 11px;
+  color: var(--violet);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.pro-notes-text {
+  font-size: 12px;
+  color: var(--text-2);
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.followup-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 8px;
+}
+
+.fu-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0;
+  position: relative;
+}
+
+.fu-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.done-dot {
+  background: var(--accent);
+}
+
+.active-dot {
+  background: var(--green);
+  box-shadow: 0 0 8px var(--green-glow);
+  animation: pulse 2s infinite;
+}
+
+.pending-dot {
+  background: var(--surface-3);
+  border: 2px solid var(--border-light);
+}
+
+.fu-content {
+  flex: 1;
+}
+
+.fu-title {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.fu-date {
+  font-size: 11px;
+  color: var(--text-3);
+}
+
+.fu-item.active-fu .fu-title {
+  color: var(--green);
+}
+
+/* ═══════════════════════════════════════════════════
+   PROFILE SCREEN
+════════════════════════════════════════════════════ */
+.profile-header-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.profile-avatar-lg {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--violet), var(--accent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 800;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.profile-name-lg {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.profile-skin-type {
+  font-size: 12px;
+  color: var(--text-3);
+  margin-bottom: 8px;
+}
+
+.profile-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.ptag {
+  font-size: 10px;
+  font-weight: 600;
+  background: var(--accent-dim);
+  color: var(--accent);
+  border: 1px solid rgba(0, 198, 255, 0.2);
+  border-radius: 12px;
+  padding: 2px 8px;
+}
+
+.profile-section {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.profile-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+
+.profile-row:last-child {
+  border-bottom: none;
+}
+
+.prow-label {
+  color: var(--text-3);
+}
+
+.prow-value {
+  font-weight: 500;
+  text-align: right;
+  max-width: 55%;
+  font-size: 12px;
+}
+
+.privacy-section {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.privacy-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-3);
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.privacy-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+
+.privacy-row:last-child {
+  border-bottom: none;
+}
+
+.delete-row {
+  color: var(--red);
+}
+
+/* Toggle component */
+.toggle {
+  width: 44px;
+  height: 24px;
+  border-radius: 12px;
+  background: var(--surface-3);
+  border: 1px solid var(--border);
+  position: relative;
+  cursor: pointer;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+
+.toggle.on {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.toggle-knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform 0.2s;
+}
+
+.toggle.on .toggle-knob {
+  transform: translateX(20px);
+}
+
+.btn-export {
+  font-size: 11px;
+  font-weight: 600;
+  background: var(--accent-dim);
+  color: var(--accent);
+  border: 1px solid rgba(0, 198, 255, 0.2);
+  border-radius: var(--radius-sm);
+  padding: 5px 12px;
+}
+
+.btn-delete {
+  font-size: 11px;
+  font-weight: 600;
+  background: var(--red-dim);
+  color: var(--red);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  border-radius: var(--radius-sm);
+  padding: 5px 12px;
+}
+/* ═══════════════════════════════════════════════════
+   SCAN LEVEL SECTIONS
+════════════════════════════════════════════════════ */
+.scan-level-section {
+  display: none;
+}
+.scan-level-section.active {
+  display: block;
+}
+
+/* Basic level — large semaphore card */
+.semaphore-hero {
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px 20px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+.semaphore-hero.status-green { border-color: rgba(34,197,94,0.4); background: rgba(34,197,94,0.07); }
+.semaphore-hero.status-amber { border-color: rgba(217,119,6,0.4); background: rgba(217,119,6,0.07); }
+.semaphore-hero.status-red   { border-color: rgba(220,38,38,0.4); background: rgba(220,38,38,0.07); }
+.semaphore-light {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  margin: 0 auto 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+.semaphore-light.green { background: #22C55E; }
+.semaphore-light.amber { background: #D97706; }
+.semaphore-light.red   { background: #DC2626; }
+.semaphore-status-text {
+  font-size: 20px; font-weight: 800; margin-bottom: 4px;
+}
+.semaphore-action {
+  font-size: 14px; color: var(--text-2); margin-bottom: 16px;
+}
+.action-cta-btn {
+  background: var(--accent); color: white;
+  border-radius: var(--radius-sm); padding: 12px 24px;
+  font-size: 14px; font-weight: 700;
+  width: 100%;
+}
+.basic-routine-strip {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 14px;
+}
+.basic-routine-title {
+  font-size: 11px; font-weight: 700; color: var(--text-3);
+  text-transform: uppercase; letter-spacing: 0.05em;
+  margin-bottom: 10px;
+}
+.basic-step-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 0; border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+.basic-step-row:last-child { border-bottom: none; }
+.basic-step-num {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--accent); color: white;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 700; flex-shrink: 0;
+}
+.basic-step-name { flex: 1; font-weight: 500; }
+.basic-step-time { font-size: 11px; color: var(--text-3); }
+
+/* Advanced level — AI insight cards */
+.ai-insight-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius); padding: 14px;
+  margin-bottom: 10px;
+  display: flex; align-items: flex-start; gap: 12px;
+}
+.ai-insight-icon { font-size: 20px; flex-shrink: 0; }
+.ai-insight-body p:first-child {
+  font-weight: 700; font-size: 15px; color: var(--accent); margin-bottom: 2px;
+}
+.ai-insight-body p:last-child { font-size: 12px; color: var(--text-2); }
+.share-report-btn {
+  background: var(--accent); color: white;
+  border-radius: var(--radius); padding: 14px 20px;
+  font-size: 14px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%; margin-top: 16px;
+}
+.share-report-btn svg { opacity: 0.9; }
+</style>
+</head>
+
+<body>
+
+  <div id="app">
+
+    <!-- STATUS BAR -->
+    <div class="status-bar">
+      <span class="status-time" id="statusTime">14:02</span>
+      <span class="status-brand">MesoPatch</span>
+      <div class="status-icons">
+        <span class="icon-wifi">▌▌▌</span>
+        <span class="icon-battery">▰▰▰▱</span>
+      </div>
+    </div>
+
+    <!-- HEADER -->
+    <header class="app-header" id="appHeader">
+      <div class="header-left">
+        <button class="btn-back hidden" id="btnBack" onclick="navigateBack()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15 18 9 12 15 6" />
+          </svg>
+        </button>
+        <div class="header-brand">
+          <span class="brand-dot"></span>
+          <span class="brand-name">meso<strong>patch</strong></span>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="patch-status-pill" id="patchPill">
+          <span class="pulse-dot"></span>
+          <span id="patchPillText">Active Patch</span>
+        </div>
+        <button class="btn-avatar" onclick="navigateTo('profile')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="8" r="4" />
+            <path d="M20 21a8 8 0 1 0-16 0" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- SCREEN CONTAINER -->
+    <main class="screen-container" id="screenContainer">
+
+      <!-- ═══════ SCREEN: HOME DASHBOARD ═══════ -->
+      <div class="screen active" id="screen-home">
+        <div class="greeting-section">
+          <p class="greeting-sub">Good morning,</p>
+          <h1 class="greeting-name">Alejandro Ferreiro</h1>
+          <p class="greeting-date" id="greetingDate">Domingo, 22 feb · Sesión 3/8</p>
+        </div>
+
+        <!-- PATCH READING CARD -->
+        <div class="patch-reading-card" onclick="navigateTo('scan')">
+          <div class="patch-card-header">
+            <div class="patch-card-title">
+              <span class="patch-icon">⬡</span>
+              <span>Last Patch Analysis</span>
+            </div>
+            <div class="patch-signal">
+              <span class="signal-dot green-dot-sm"></span>
+              <span class="signal-label">Optimal signal</span>
+            </div>
+          </div>
+          <div class="patch-absorption-display">
+            <div class="absorption-value">
+              <span class="absorption-number" id="absorptionVal">87</span>
+              <span class="absorption-unit">%</span>
+            </div>
+            <div class="absorption-meta">
+              <span class="absorption-label">Active absorption</span>
+              <div class="absorption-bar-wrap">
+                <div class="absorption-bar" id="absorptionBar" style="width: 87%"></div>
+              </div>
+              <span class="absorption-rate" id="absorptionRate">2.4 μg/cm²/h · Hace 12 min</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- BIOMETRICS — ALL 5 from PDF -->
+        <div class="section-header">
+          <h2 class="section-title">Skin Biometrics</h2>
+          <button class="btn-more" onclick="navigateTo('scan')">View map →</button>
+        </div>
+
+        <!-- Row 1: Hydration + Barrier + Irritation -->
+        <div class="metrics-grid">
+          <div class="metric-card" id="metricHydration">
+            <div class="metric-header">
+              <div class="metric-icon hydration-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
+                </svg>
+              </div>
+              <span class="semaphore-badge green" id="hydBadge">ÓPTIMA</span>
+            </div>
+            <span class="metric-value" id="hydVal">72<small>%</small></span>
+            <span class="metric-label">Hydration</span>
+            <div class="metric-bar-track">
+              <div class="metric-bar" id="hydBar" style="width:72%;background:var(--green)"></div>
+            </div>
+            <span class="metric-delta green-text">↑ +4% hoy</span>
+          </div>
+          <div class="metric-card" id="metricBarrier">
+            <div class="metric-header">
+              <div class="metric-icon barrier-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="11" width="18" height="10" rx="2" />
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                </svg>
+              </div>
+              <span class="semaphore-badge yellow" id="barrBadge">MODERADA</span>
+            </div>
+            <span class="metric-value" id="barrVal">54<small>%</small></span>
+            <span class="metric-label">Barrier</span>
+            <div class="metric-bar-track">
+              <div class="metric-bar" id="barrBar" style="width:54%;background:var(--yellow)"></div>
+            </div>
+            <span class="metric-delta yellow-text">→ Estable</span>
+          </div>
+          <div class="metric-card" id="metricIrritation">
+            <div class="metric-header">
+              <div class="metric-icon irritation-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="12" y1="8" x2="12" y2="12" />
+                  <line x1="12" y1="16" x2="12.01" y2="16" />
+                </svg>
+              </div>
+              <span class="semaphore-badge green" id="irritBadge">BAJA</span>
+            </div>
+            <span class="metric-value" id="irritVal">18<small>%</small></span>
+            <span class="metric-label">Irritation</span>
+            <div class="metric-bar-track">
+              <div class="metric-bar" id="irritBar" style="width:18%;background:var(--green)"></div>
+            </div>
+            <span class="metric-delta green-text">↓ −6% hoy</span>
+          </div>
+        </div>
+
+        <!-- Row 2: Sebum + Stress (from PDF) -->
+        <div class="metrics-grid metrics-grid-2" style="margin-top:10px;">
+          <div class="metric-card metric-wide" id="metricSebum">
+            <div class="metric-header">
+              <div class="metric-icon sebum-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="3" />
+                  <path
+                    d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" />
+                </svg>
+              </div>
+              <span class="semaphore-badge yellow" id="sebumBadge">MODERADO</span>
+            </div>
+            <span class="metric-value" id="sebumVal">42<small>%</small></span>
+            <span class="metric-label">Sebum</span>
+            <div class="metric-bar-track">
+              <div class="metric-bar" id="sebumBar" style="width:42%;background:var(--yellow)"></div>
+            </div>
+            <span class="metric-delta yellow-text">↑ +8% semana</span>
+          </div>
+          <div class="metric-card metric-wide" id="metricStress">
+            <div class="metric-header">
+              <div class="metric-icon stress-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                </svg>
+              </div>
+              <span class="semaphore-badge green" id="stressBadge">BAJO</span>
+            </div>
+            <span class="metric-value" id="stressVal">22<small>%</small></span>
+            <span class="metric-label">Skin Stress</span>
+            <div class="metric-bar-track">
+              <div class="metric-bar" id="stressBar" style="width:22%;background:var(--green)"></div>
+            </div>
+            <span class="metric-delta green-text">↓ −3% hoy</span>
+          </div>
+        </div>
+
+        <!-- ALERT BANNER -->
+        <div class="alert-banner yellow-alert" id="alertBanner">
+          <div class="alert-icon">⚠</div>
+          <div class="alert-content">
+            <p class="alert-title">Barrera en zona mejillas</p>
+            <p class="alert-body">Se detectó moderada permeabilidad. Rutina PM ajustada automáticamente.</p>
+          </div>
+          <button class="alert-cta" onclick="navigateTo('routine')">Ver →</button>
+        </div>
+
+        <!-- QUICK ACTIONS (PDF: Scan, Start Routine, Chatbot) -->
+        <div class="section-header">
+          <h2 class="section-title">Quick Actions</h2>
+        </div>
+        <div class="quick-actions-row">
+          <button class="quick-action-btn" onclick="navigateTo('scan')">
+            <div class="quick-icon accent-bg">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+            </div>
+            <span>Scan</span>
+          </button>
+          <button class="quick-action-btn" onclick="navigateTo('routine')">
+            <div class="quick-icon green-bg">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+            </div>
+            <span>Routine</span>
+          </button>
+          <button class="quick-action-btn" onclick="navigateTo('chatbot')">
+            <div class="quick-icon violet-bg">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--violet)" stroke-width="2">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+              </svg>
+            </div>
+            <span>Chatbot</span>
+          </button>
+          <button class="quick-action-btn" onclick="navigateTo('inventory')">
+            <div class="quick-icon teal-bg">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <path d="M16 10a4 4 0 0 1-8 0" />
+              </svg>
+            </div>
+            <span>Products</span>
+          </button>
+        </div>
+
+        <!-- SESSION PROGRESS -->
+        <div class="section-header">
+          <h2 class="section-title">Treatment Progress</h2>
+          <button class="btn-more" onclick="navigateTo('progress')">History →</button>
+        </div>
+        <div class="session-track">
+          <div class="session-dots">
+            <div class="session-dot done"><span>1</span></div>
+            <div class="session-dot done"><span>2</span></div>
+            <div class="session-dot active"><span>3</span></div>
+            <div class="session-dot"><span>4</span></div>
+            <div class="session-dot"><span>5</span></div>
+            <div class="session-dot"><span>6</span></div>
+            <div class="session-dot"><span>7</span></div>
+            <div class="session-dot"><span>8</span></div>
+          </div>
+          <div class="session-progress-bar">
+            <div class="session-progress-fill" style="width:37.5%"></div>
+          </div>
+          <div class="session-insight">
+            <span class="insight-icon">📈</span>
+            <span class="insight-text">+18% hydration over 30 days · Adherence 94%</span>
+          </div>
+        </div>
+
+        <div class="next-actions">
+          <button class="action-btn-primary" onclick="navigateTo('routine')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10" />
+              <polyline points="12 6 12 12 16 14" />
+            </svg>
+            Start AM Routine
+          </button>
+          <button class="action-btn-secondary" onclick="navigateTo('clinicSync')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path
+                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.99 12 19.79 19.79 0 0 1 1.93 3.49 2 2 0 0 1 3.9 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9a16 16 0 0 0 6.91 6.91l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+            </svg>
+            Clinic
+          </button>
+        </div>
+      </div>
+
+      <!-- ═══════ SCREEN: SKIN SCAN (MesoPatch Core) ═══════ -->
+      <div class="screen" id="screen-scan">
+        <div class="screen-title-section">
+          <h1 class="screen-title">Skin Scan™</h1>
+          <p class="screen-subtitle">MesoPatch Core · Active signal · Real-time</p>
+        </div>
+
+        <!-- RESULT LEVEL (Basic / Intermediate / Advanced — PDF spec) -->
+        <div class="result-level-selector">
+          <button class="level-btn active" id="lvlBasic" onclick="setResultLevel('basic')">Basic</button>
+          <button class="level-btn" id="lvlIntermed" onclick="setResultLevel('intermediate')">Medium</button>
+          <button class="level-btn" id="lvlAdvanced" onclick="setResultLevel('advanced')">Advanced</button>
+        </div>
+
+        <!-- ═══ LEVEL: BASIC ═══ -->
+        <div class="scan-level-section active" id="scan-basic">
+          <div class="semaphore-hero status-amber">
+            <div class="semaphore-light amber">⚠</div>
+            <p class="semaphore-status-text" style="color:var(--yellow)">Attention needed</p>
+            <p class="semaphore-action">Cheek barrier is moderate — PM routine adjusted automatically</p>
+            <button class="action-cta-btn" onclick="navigateTo('routine')">Start PM Routine now →</button>
+          </div>
+          <div class="basic-routine-strip">
+            <p class="basic-routine-title">Today's PM Summary</p>
+            <div class="basic-step-row">
+              <div class="basic-step-num">1</div>
+              <span class="basic-step-name">Gentle double cleanse</span>
+              <span class="basic-step-time">2 min</span>
+            </div>
+            <div class="basic-step-row">
+              <div class="basic-step-num">2</div>
+              <span class="basic-step-name">Repair ampoule ×1.5 dose</span>
+              <span class="basic-step-time">4 min</span>
+            </div>
+            <div class="basic-step-row">
+              <div class="basic-step-num">3</div>
+              <span class="basic-step-name">Night barrier cream</span>
+              <span class="basic-step-time">2 min</span>
+            </div>
+            <div class="basic-step-row">
+              <div class="basic-step-num">4</div>
+              <span class="basic-step-name">MesoPatch™ night mode</span>
+              <span class="basic-step-time">All night</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ LEVEL: MEDIUM ═══ -->
+        <div class="scan-level-section" id="scan-medium">
+          <!-- FACE MAP -->
+          <div class="face-map-container">
+            <div class="face-map-legend">
+              <div class="legend-item"><span class="legend-dot green-dot"></span>Optimal</div>
+              <div class="legend-item"><span class="legend-dot yellow-dot"></span>Moderate</div>
+              <div class="legend-item"><span class="legend-dot red-dot"></span>High sensitiv.</div>
+            </div>
+            <div class="face-svg-wrap">
+              <svg viewBox="0 0 200 260" class="face-svg" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="100" cy="245" rx="25" ry="18" fill="rgba(34,197,94,0.15)" stroke="rgba(34,197,94,0.4)" stroke-width="1" />
+                <ellipse cx="100" cy="115" rx="72" ry="90" fill="rgba(244,242,238,0.95)" stroke="rgba(217,213,204,1)" stroke-width="1.5" />
+                <ellipse cx="100" cy="58" rx="52" ry="28" fill="rgba(34,197,94,0.25)" stroke="rgba(34,197,94,0.6)" stroke-width="1.5" class="face-zone zone-green" data-zone="forehead" onclick="zoneClick(this)" />
+                <text x="100" y="55" text-anchor="middle" fill="rgba(22,160,60,0.9)" font-size="7" font-family="Inter">FOREHEAD</text>
+                <text x="100" y="64" text-anchor="middle" fill="rgba(22,160,60,0.7)" font-size="6" font-family="Inter">✓ Optimal</text>
+                <ellipse cx="47" cy="128" rx="28" ry="32" fill="rgba(217,119,6,0.2)" stroke="rgba(217,119,6,0.7)" stroke-width="1.5" class="face-zone zone-yellow" data-zone="cheek-left" onclick="zoneClick(this)" />
+                <text x="47" y="125" text-anchor="middle" fill="rgba(180,90,0,0.9)" font-size="6" font-family="Inter">L. CHEEK</text>
+                <text x="47" y="133" text-anchor="middle" fill="rgba(180,90,0,0.7)" font-size="6" font-family="Inter">⚠ Mod.</text>
+                <ellipse cx="153" cy="128" rx="28" ry="32" fill="rgba(217,119,6,0.2)" stroke="rgba(217,119,6,0.7)" stroke-width="1.5" class="face-zone zone-yellow" data-zone="cheek-right" onclick="zoneClick(this)" />
+                <text x="153" y="125" text-anchor="middle" fill="rgba(180,90,0,0.9)" font-size="6" font-family="Inter">R. CHEEK</text>
+                <text x="153" y="133" text-anchor="middle" fill="rgba(180,90,0,0.7)" font-size="6" font-family="Inter">⚠ Mod.</text>
+                <ellipse cx="100" cy="125" rx="18" ry="22" fill="rgba(220,38,38,0.2)" stroke="rgba(220,38,38,0.7)" stroke-width="1.5" class="face-zone zone-red" data-zone="nose" onclick="zoneClick(this)" />
+                <text x="100" y="122" text-anchor="middle" fill="rgba(180,20,20,0.9)" font-size="6" font-family="Inter">NOSE</text>
+                <text x="100" y="130" text-anchor="middle" fill="rgba(180,20,20,0.7)" font-size="6" font-family="Inter">✕ High</text>
+                <ellipse cx="100" cy="184" rx="30" ry="20" fill="rgba(34,197,94,0.2)" stroke="rgba(34,197,94,0.5)" stroke-width="1.5" class="face-zone zone-green" data-zone="chin" onclick="zoneClick(this)" />
+                <text x="100" y="181" text-anchor="middle" fill="rgba(22,160,60,0.9)" font-size="7" font-family="Inter">CHIN</text>
+                <text x="100" y="189" text-anchor="middle" fill="rgba(22,160,60,0.7)" font-size="6" font-family="Inter">✓ Optimal</text>
+                <ellipse cx="78" cy="92" rx="10" ry="5" fill="rgba(244,242,238,0.98)" stroke="rgba(196,163,90,0.3)" stroke-width="1" />
+                <ellipse cx="122" cy="92" rx="10" ry="5" fill="rgba(244,242,238,0.98)" stroke="rgba(196,163,90,0.3)" stroke-width="1" />
+                <circle cx="78" cy="92" r="3" fill="rgba(92,84,73,0.5)" />
+                <circle cx="122" cy="92" r="3" fill="rgba(92,84,73,0.5)" />
+                <path d="M88 160 Q100 168 112 160" stroke="rgba(138,115,85,0.4)" stroke-width="1.5" fill="none" />
+              </svg>
+            </div>
+            <div class="zone-detail-panel" id="zoneDetail">
+              <p class="zone-detail-hint">Tap a facial zone to see details</p>
+            </div>
+          </div>
+
+          <!-- TREND CHARTS -->
+          <div class="section-header">
+            <h2 class="section-title">Biometric Trends</h2>
+          </div>
+          <div class="trend-selector">
+            <button class="trend-btn active" onclick="setTrend(this,'24h')">24h</button>
+            <button class="trend-btn" onclick="setTrend(this,'7d')">7 days</button>
+          </div>
+          <div class="trend-chart-wrap">
+            <canvas id="trendChart" class="trend-chart"></canvas>
+            <div class="trend-labels">
+              <span>Hydration</span><span>Barrier</span><span>Irritation</span>
+            </div>
+          </div>
+
+          <!-- ZONE LIST -->
+          <div class="section-header">
+            <h2 class="section-title">Analysis by Zone</h2>
+          </div>
+          <div class="zone-cards-list">
+            <div class="zone-card zone-card-red" onclick="showZoneDetail('nose')">
+              <div class="zone-card-icon red-bg">🔴</div>
+              <div class="zone-card-body">
+                <p class="zone-card-name">Nasal Zone</p>
+                <p class="zone-card-status">High sensitivity · Hydration 31%</p>
+              </div>
+              <div class="zone-card-action">→</div>
+            </div>
+            <div class="zone-card zone-card-yellow" onclick="showZoneDetail('cheek-left')">
+              <div class="zone-card-icon yellow-bg">🟡</div>
+              <div class="zone-card-body">
+                <p class="zone-card-name">Left Cheek</p>
+                <p class="zone-card-status">Moderate sensitivity · Barrier 52%</p>
+              </div>
+              <div class="zone-card-action">→</div>
+            </div>
+            <div class="zone-card zone-card-yellow" onclick="showZoneDetail('cheek-right')">
+              <div class="zone-card-icon yellow-bg">🟡</div>
+              <div class="zone-card-body">
+                <p class="zone-card-name">Right Cheek</p>
+                <p class="zone-card-status">Moderate sensitivity · Barrier 56%</p>
+              </div>
+              <div class="zone-card-action">→</div>
+            </div>
+            <div class="zone-card zone-card-green" onclick="showZoneDetail('forehead')">
+              <div class="zone-card-icon green-bg">🟢</div>
+              <div class="zone-card-body">
+                <p class="zone-card-name">Forehead</p>
+                <p class="zone-card-status">Optimal status · Hydration 78%</p>
+              </div>
+              <div class="zone-card-action">→</div>
+            </div>
+            <div class="zone-card zone-card-green" onclick="showZoneDetail('chin')">
+              <div class="zone-card-icon green-bg">🟢</div>
+              <div class="zone-card-body">
+                <p class="zone-card-name">Chin</p>
+                <p class="zone-card-status">Optimal status · Hydration 81%</p>
+              </div>
+              <div class="zone-card-action">→</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ LEVEL: ADVANCED ═══ -->
+        <div class="scan-level-section" id="scan-advanced">
+          <!-- 30-day trend -->
+          <div class="section-header">
+            <h2 class="section-title">30-Day Analysis</h2>
+          </div>
+          <div class="trend-selector">
+            <button class="trend-btn active" onclick="setTrend(this,'30d')">30 days</button>
+            <button class="trend-btn" onclick="setTrend(this,'7d')">7 days</button>
+          </div>
+          <div class="trend-chart-wrap">
+            <canvas id="trendChart30" class="trend-chart"></canvas>
+            <div class="trend-labels">
+              <span>Hydration</span><span>Barrier</span><span>Irritation</span>
+            </div>
+          </div>
+
+          <!-- AI INSIGHTS -->
+          <div class="section-header" style="margin-top:16px">
+            <h2 class="section-title">AI Insights</h2>
+          </div>
+          <div class="ai-insight-card">
+            <div class="ai-insight-icon">💧</div>
+            <div class="ai-insight-body">
+              <p>+45% Hydration vs. Week 1 baseline</p>
+              <p>Consistent upward trend — patch absorption optimised for cheek zones</p>
+            </div>
+          </div>
+          <div class="ai-insight-card" style="border-left-color:var(--green)">
+            <div class="ai-insight-icon">🛡</div>
+            <div class="ai-insight-body">
+              <p style="color:var(--green)">Barrier recovering — Week 3 projection: 68%</p>
+              <p>If current routine adhered to, barrier will reach optimal by Day 32</p>
+            </div>
+          </div>
+          <div class="ai-insight-card" style="border-left-color:var(--yellow)">
+            <div class="ai-insight-icon">⚠</div>
+            <div class="ai-insight-body">
+              <p style="color:var(--yellow)">Nasal zone: −38% irritation over 30 days</p>
+              <p>SOS mask protocol effective — continue 3× per week for 2 more weeks</p>
+            </div>
+          </div>
+
+          <!-- SIGNAL CARD -->
+          <div class="signal-card">
+            <div class="signal-row">
+              <span class="signal-label-text">Signal quality</span>
+              <div class="signal-bars">
+                <div class="bar-seg filled"></div><div class="bar-seg filled"></div>
+                <div class="bar-seg filled"></div><div class="bar-seg filled"></div>
+                <div class="bar-seg"></div>
+              </div>
+              <span class="signal-pct accent-text">80%</span>
+            </div>
+            <div class="signal-row">
+              <span class="signal-label-text">Chip status</span>
+              <span class="chip-badge">Calibrated ✓</span>
+            </div>
+            <div class="signal-row">
+              <span class="signal-label-text">BLE Connection</span>
+              <span class="ble-status"><span class="pulse-dot-small"></span> Active</span>
+            </div>
+          </div>
+
+          <button class="share-report-btn" onclick="navigateTo('clinicSync');showToast('📊 Generating report for Dr. Ramírez...')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+              <polyline points="16 6 12 2 8 6" />
+              <line x1="12" y1="2" x2="12" y2="15" />
+            </svg>
+            Share Report with Clinic
+          </button>
+        </div>
+
+      </div>
+
+      <!-- ═══════ SCREEN: INTELLIGENT ROUTINE & VIDEO TUTORIALS ═══════ -->
+      <div class="screen" id="screen-routine">
+        <div class="screen-title-section">
+          <h1 class="screen-title">Intelligent Routine™</h1>
+          <p class="screen-subtitle">Recalibrated by the patch · Daily automatic adjustment</p>
+        </div>
+
+        <div class="ampm-toggle-wrap">
+          <div class="ampm-toggle" id="ampmToggle">
+            <button class="ampm-btn active" id="btnAM" onclick="switchRoutine('AM')"><span>🌅</span> AM</button>
+            <button class="ampm-btn" id="btnPM" onclick="switchRoutine('PM')"><span>🌙</span> PM</button>
+          </div>
+          <div class="routine-alert-tag" id="routineAlertTag">
+            <span class="alert-indicator yellow-pulse"></span>
+            Auto-adjusted
+          </div>
+        </div>
+
+        <!-- Sensitivity mode (PDF: Sensitivity detection + recovery mode) -->
+        <div class="sensitivity-mode-bar" id="sensitivityMode">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="8" x2="12" y2="12" />
+            <line x1="12" y1="16" x2="12.01" y2="16" />
+          </svg>
+          <span>Barrier Recovery Mode activated</span>
+        </div>
+
+        <div class="routine-steps" id="routineSteps"></div>
+
+        <!-- VIDEO TUTORIALS section (PDF 2.4) -->
+        <div class="section-header">
+          <h2 class="section-title">Video Tutorials</h2>
+          <span class="section-tag">AI Guided</span>
+        </div>
+        <div class="video-tutorial-list">
+          <div class="video-card" onclick="playTutorial(this, 'limpieza')">
+            <div class="video-thumb accent-bg">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <polygon points="10 8 16 12 10 16 10 8" />
+              </svg>
+            </div>
+            <div class="video-info">
+              <p class="video-title">Gentle cleansing technique</p>
+              <p class="video-meta">45 sec · Step 1 AM</p>
+            </div>
+            <span class="video-tag">Específico</span>
+          </div>
+          <div class="video-card" onclick="playTutorial(this, 'ampolla')">
+            <div class="video-thumb violet-bg">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--violet)" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <polygon points="10 8 16 12 10 16 10 8" />
+              </svg>
+            </div>
+            <div class="video-info">
+              <p class="video-title">Repair ampoule application</p>
+              <p class="video-meta">1 min 20 sec · Step 3 PM · Dose ×1.5</p>
+            </div>
+            <span class="video-tag adjusted">Ajustado</span>
+          </div>
+          <div class="video-card" onclick="playTutorial(this, 'parche')">
+            <div class="video-thumb teal-bg">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <polygon points="10 8 16 12 10 16 10 8" />
+              </svg>
+            </div>
+            <div class="video-info">
+              <p class="video-title">MesoPatch™ Placement</p>
+              <p class="video-meta">2 min · Maximum absorption zone</p>
+            </div>
+            <span class="video-tag">Esencial</span>
+          </div>
+        </div>
+
+        <div class="algo-info-card">
+          <div class="algo-icon">🧠</div>
+          <div class="algo-text">
+            <p class="algo-title">MesoPatch™ Adaptive Algorithm</p>
+            <p class="algo-body">Steps ✦ have been recalibrated today. Order, quantity and timing adjusted based on
+              patch data. Users don't need to remember, interpret or guess.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════ SCREEN: PROGRESS & SKIN HISTORY ═══════ -->
+      <div class="screen" id="screen-progress">
+        <div class="screen-title-section">
+          <h1 class="screen-title">Progreso & Historial</h1>
+          <p class="screen-subtitle">Evolución de tu piel · Últimos 30 días</p>
+        </div>
+
+        <!-- BEFORE/AFTER (PDF 2.5) -->
+        <div class="before-after-card">
+          <div class="ba-header">
+            <span class="ba-title">Photo Comparison</span>
+            <span class="ba-date">Session 1 → Session 3</span>
+          </div>
+          <div class="ba-images">
+            <div class="ba-image-slot before">
+              <div class="ba-placeholder">BEFORE<br><small>Session 1<br>1 Feb 2026</small></div>
+              <span class="ba-label">Before</span>
+            </div>
+            <div class="ba-divider">↔</div>
+            <div class="ba-image-slot after">
+              <div class="ba-placeholder after-glow">AFTER<br><small>Session 3<br>17 Mar 2026</small></div>
+              <span class="ba-label">Now</span>
+            </div>
+          </div>
+          <button class="btn-add-photo" onclick="showToast('📷 Camera ready for comparison photo')">+ Add photo today</button>
+        </div>
+
+        <!-- AUTOMATED INSIGHTS (PDF: +18% hydration in 30 days) -->
+        <div class="section-header">
+          <h2 class="section-title">Automated Insights</h2>
+        </div>
+        <div class="insights-list">
+          <div class="insight-card accent-card">
+            <span class="insight-num accent-text">+28%</span>
+            <div class="insight-info">
+              <p class="insight-title">Improved hydration</p>
+              <p class="insight-sub">vs. start of treatment</p>
+            </div>
+          </div>
+          <div class="insight-card green-card">
+            <span class="insight-num green-text">94%</span>
+            <div class="insight-info">
+              <p class="insight-title">Treatment adherence</p>
+              <p class="insight-sub">Excellent · 22 of 23 days</p>
+            </div>
+          </div>
+          <div class="insight-card yellow-card">
+            <span class="insight-num yellow-text">−18%</span>
+            <div class="insight-info">
+              <p class="insight-title">Irritation reduction</p>
+              <p class="insight-sub">Nasal zone over 3 weeks</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- MILESTONES (PDF: Milestones and adherence indicators) -->
+        <div class="section-header">
+          <h2 class="section-title">Treatment Milestones</h2>
+        </div>
+        <div class="milestones-list">
+          <div class="milestone done"><span class="ms-icon">🏅</span>
+            <div><p class="ms-title">First week completed</p><p class="ms-date">8 Feb 2026</p></div>
+          </div>
+          <div class="milestone done"><span class="ms-icon">💧</span>
+            <div><p class="ms-title">Hydration crossed optimal threshold</p><p class="ms-date">14 Feb 2026</p></div>
+          </div>
+          <div class="milestone done"><span class="ms-icon">⭐</span>
+            <div><p class="ms-title">Session 3 completed</p><p class="ms-date">Today · 17 Mar 2026</p></div>
+          </div>
+          <div class="milestone pending"><span class="ms-icon">🎯</span>
+            <div><p class="ms-title">Barrier at optimal level</p><p class="ms-date">Goal: ~10 days</p></div>
+          </div>
+          <div class="milestone pending"><span class="ms-icon">🏆</span>
+            <div><p class="ms-title">Treatment complete (8 sessions)</p><p class="ms-date">Target: 22 Apr 2026</p></div>
+          </div>
+        </div>
+
+        <!-- WEEKLY/MONTHLY COMPARISON (PDF 2.5) -->
+        <div class="section-header">
+          <h2 class="section-title">Weekly Evolution</h2>
+        </div>
+        <div class="weekly-chart-wrap">
+          <canvas id="weeklyChart" class="trend-chart"></canvas>
+        </div>
+      </div>
+
+      <!-- ═══════ SCREEN: SMART PRODUCT MANAGEMENT ═══════ -->
+      <div class="screen" id="screen-inventory">
+        <div class="screen-title-section">
+          <h1 class="screen-title">Smart Inventory</h1>
+          <p class="screen-subtitle">Smart product management · Compatible with your current status</p>
+        </div>
+
+        <!-- COMPATIBILITY ALERT -->
+        <div class="compat-alert">
+          <span>🔬</span>
+          <p>Compatibility verified with your current skin profile. <strong>1 alert</strong> on stock.</p>
+        </div>
+
+        <div class="section-header">
+          <h2 class="section-title">My Products</h2>
+          <button class="btn-more" onclick="showToast('📷 Barcode scanner ready')">+ Add</button>
+        </div>
+        <div class="product-list">
+          <div class="product-card">
+            <div class="product-icon accent-bg">🧴</div>
+            <div class="product-info">
+              <p class="product-name">Hyaluronic Concentrate 2%</p>
+              <div class="product-meta-row">
+                <span class="product-stock ok">Stock: 68%</span>
+                <span class="product-expiry">CAD: oct 2026</span>
+              </div>
+              <div class="product-stock-bar">
+                <div class="product-stock-fill" style="width:68%;background:var(--green)"></div>
+              </div>
+            </div>
+            <span class="compat-badge compat-ok">✓</span>
+          </div>
+          <div class="product-card">
+            <div class="product-icon violet-bg">🧪</div>
+            <div class="product-info">
+              <p class="product-name">Cosmelan Maintenance Cream</p>
+              <div class="product-meta-row">
+                <span class="product-stock warning">Stock: 22%</span>
+                <span class="product-expiry">CAD: jun 2026</span>
+              </div>
+              <div class="product-stock-bar">
+                <div class="product-stock-fill" style="width:22%;background:var(--yellow)"></div>
+              </div>
+            </div>
+            <span class="compat-badge compat-warn">!</span>
+          </div>
+          <div class="product-card">
+            <div class="product-icon teal-bg">☀️</div>
+            <div class="product-info">
+              <p class="product-name">Mesoprotech Melan 130 FPS50+</p>
+              <div class="product-meta-row">
+                <span class="product-stock ok">Stock: 85%</span>
+                <span class="product-expiry">CAD: ene 2027</span>
+              </div>
+              <div class="product-stock-bar">
+                <div class="product-stock-fill" style="width:85%;background:var(--green)"></div>
+              </div>
+            </div>
+            <span class="compat-badge compat-ok">✓</span>
+          </div>
+          <div class="product-card low-stock">
+            <div class="product-icon red-bg">🧫</div>
+            <div class="product-info">
+              <p class="product-name">Dermamelan Mask SOS</p>
+              <div class="product-meta-row">
+                <span class="product-stock danger">Stock: 8% — Bajo</span>
+                <span class="product-expiry">CAD: mar 2026</span>
+              </div>
+              <div class="product-stock-bar">
+                <div class="product-stock-fill" style="width:8%;background:var(--red)"></div>
+              </div>
+            </div>
+            <span class="compat-badge compat-ok">✓</span>
+          </div>
+        </div>
+
+        <!-- AUTO-REORDER (PDF spec) -->
+        <div class="reorder-card">
+          <div class="reorder-header">
+            <span class="reorder-icon">🔄</span>
+            <div>
+              <p class="reorder-title">Auto Reorder</p>
+              <p class="reorder-sub">Dermamelan Mask SOS · Critical stock</p>
+            </div>
+          </div>
+          <div class="reorder-actions">
+            <button class="btn-reorder-confirm"
+              onclick="showToast('✅ Order confirmed · Delivery in 2-3 days')">Confirm order</button>
+            <button class="btn-reorder-cancel" onclick="showToast('Order cancelled')">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════ SCREEN: AI CHATBOT ═══════ -->
+      <div class="screen" id="screen-chatbot">
+        <div class="screen-title-section">
+          <h1 class="screen-title">AI Assistant</h1>
+          <p class="screen-subtitle">Dermatological assistant · Available 24/7</p>
+        </div>
+
+        <div class="chatbot-container">
+          <div class="chatbot-messages" id="chatMessages">
+            <!-- System message -->
+            <div class="chat-msg system">
+              <div class="chat-avatar-ai">🩹</div>
+              <div class="chat-bubble">
+                <p>Hello Alejandro 👋 I'm your MesoPatch dermatological assistant. I've analysed today's data and have some recommendations.</p>
+                <p style="margin-top:8px;color:var(--accent)">⚠ I detect moderate irritation in the nasal zone. Would you like me to explain the cause?</p>
+                <span class="bubble-time">14:02</span>
+              </div>
+            </div>
+            <div class="chat-msg system">
+              <div class="chat-avatar-ai">🩹</div>
+              <div class="chat-bubble">
+                <p>Tu barrera cutánea en pómulos está al 54%. He ajustado tu rutina PM con base en esto. El exfoliante
+                  ha sido <strong>omitido</strong> para hoy.</p>
+                <span class="bubble-time">14:02</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- QUICK QUESTIONS (from PDF: guidance, alert interpretation) -->
+          <div class="quick-questions">
+            <button class="qq-btn" onclick="sendQuickQ(this, 'Why is my barrier low?')">Why is my barrier low?</button>
+            <button class="qq-btn" onclick="sendQuickQ(this, 'Can I use exfoliant today?')">Can I use exfoliant today?</button>
+            <button class="qq-btn" onclick="sendQuickQ(this, 'Explain nasal irritation')">Explain nasal irritation</button>
+          </div>
+
+          <div class="chat-input-row">
+            <input type="text" class="chat-input" id="chatInput" placeholder="Ask a question..."
+              onkeydown="if(event.key==='Enter') sendChatMsg()" />
+            <button class="chat-send-btn" onclick="sendChatMsg()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="22" y1="2" x2="11" y2="13" />
+                <polygon points="22 2 15 22 11 13 2 9 22 2" />
+              </svg>
+            </button>
+          </div>
+
+          <!-- ESCALATION (PDF: Human escalation for adverse reactions) -->
+          <div class="escalation-note">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--text-3)" stroke-width="2">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="8" x2="12" y2="12" />
+              <line x1="12" y1="16" x2="12.01" y2="16" />
+            </svg>
+            <span>If you detect an adverse reaction, the assistant will connect you with Dr. Ramírez in real time.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════ SCREEN: CLINIC SYNC (B2B2C) ═══════ -->
+      <div class="screen" id="screen-clinicSync">
+        <div class="screen-title-section">
+          <h1 class="screen-title">Clinic Sync™</h1>
+          <p class="screen-subtitle">Active professional B2B2C connection</p>
+        </div>
+
+        <!-- QR LINK (PDF: Clinic linking via code or QR) -->
+        <div class="qr-link-bar" onclick="showToast('📷 Escanea el QR de la clínica para vincular')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7" />
+            <rect x="14" y="3" width="7" height="7" />
+            <rect x="3" y="14" width="7" height="7" />
+            <rect x="14" y="14" width="7" height="7" />
+          </svg>
+          <span>Link new clinic via QR or code</span>
+          <span class="qr-arrow">→</span>
+        </div>
+
+        <div class="clinic-card">
+          <div class="clinic-card-header">
+            <div class="clinic-logo-wrap">
+              <div class="clinic-logo">M</div>
+            </div>
+            <div class="clinic-info">
+              <p class="clinic-name">Clínica Mesoestetic BCN</p>
+              <p class="clinic-address">Passeig de Gràcia, 42 · Barcelona</p>
+            </div>
+            <div class="sync-status-badge active-badge"><span class="pulse-dot-small"></span>Sync</div>
+          </div>
+          <div class="clinic-pro">
+            <div class="pro-avatar">DR</div>
+            <div class="pro-info">
+              <p class="pro-name">Dr. Ramírez Estévez</p>
+              <p class="pro-role">Dermo-cosmetology · Digital protocol</p>
+            </div>
+            <button class="btn-message" onclick="showMessageSent()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- PROFESSIONAL RECOMMENDATIONS (PDF spec) -->
+        <div class="pro-notes-card">
+          <p class="pro-notes-label">📝 Dr. Ramírez's note (20 Feb 2026)</p>
+          <p class="pro-notes-text">"Excellent barrier evolution. Maintain repair ampoule dose ×1.5 for 7 more days. Avoid exfoliation until next session."</p>
+        </div>
+
+        <!-- TREATMENT FOLLOW-UP (PDF) -->
+        <div class="section-header">
+          <h2 class="section-title">Professional Follow-up</h2>
+        </div>
+        <div class="followup-timeline">
+          <div class="fu-item done">
+            <div class="fu-dot done-dot"></div>
+            <div class="fu-content"><p class="fu-title">Initial protocol established</p><p class="fu-date">1 Feb 2026</p></div>
+          </div>
+          <div class="fu-item done">
+            <div class="fu-dot done-dot"></div>
+            <div class="fu-content"><p class="fu-title">Session 2 review — Dose adjustment</p><p class="fu-date">15 Feb 2026</p></div>
+          </div>
+          <div class="fu-item active-fu">
+            <div class="fu-dot active-dot"></div>
+            <div class="fu-content"><p class="fu-title">Session 3 active — Real-time data</p><p class="fu-date">Today · 17 Mar 2026</p></div>
+          </div>
+          <div class="fu-item">
+            <div class="fu-dot pending-dot"></div>
+            <div class="fu-content"><p class="fu-title">Next in-person appointment</p><p class="fu-date">5 Apr 2026 · 11:00h</p></div>
+          </div>
+        </div>
+
+        <!-- SHARED REPORTS -->
+        <div class="section-header">
+          <h2 class="section-title">Shared Reports</h2>
+          <button class="btn-more" onclick="generateReport()">+ New</button>
+        </div>
+        <div class="reports-list">
+          <div class="report-card" onclick="openReport(this)">
+            <div class="report-icon accent-bg">📊</div>
+            <div class="report-body"><p class="report-title">Session 3 Report — Biometrics</p><p class="report-date">17 Mar 2026 · PDF · Shared</p></div>
+            <div class="report-shared-indicator"><span class="shared-avatar">DR</span></div>
+          </div>
+          <div class="report-card" onclick="openReport(this)">
+            <div class="report-icon teal-bg">📈</div>
+            <div class="report-body"><p class="report-title">Hydration Evolution — Weeks 1-3</p><p class="report-date">15 Feb 2026 · Auto insights</p></div>
+            <div class="report-shared-indicator"><span class="shared-avatar">DR</span></div>
+          </div>
+          <div class="report-card" onclick="openReport(this)">
+            <div class="report-icon purple-bg">🗺</div>
+            <div class="report-body"><p class="report-title">Facial Map — Comparison ses. 1→3</p><p class="report-date">17 Mar 2026 · Aggregated</p></div>
+            <div class="report-shared-indicator"><span class="shared-avatar">DR</span></div>
+          </div>
+        </div>
+
+        <!-- STATS -->
+        <div class="stats-row">
+          <div class="stat-box"><span class="stat-number accent-text">+28%</span><span class="stat-label">Hydration</span></div>
+          <div class="stat-box"><span class="stat-number green-text">94%</span><span class="stat-label">Adherence</span></div>
+          <div class="stat-box"><span class="stat-number yellow-text">37%</span><span class="stat-label">Completed</span></div>
+        </div>
+
+        <div class="next-appt-card">
+          <div class="appt-icon">📅</div>
+          <div class="appt-info">
+            <p class="appt-label">Next in-person appointment</p>
+            <p class="appt-date">Wednesday, 5 Apr 2026 — 11:00h</p>
+          </div>
+          <button class="btn-confirm-appt" onclick="showToast('✅ Appointment confirmed')">Confirm</button>
+        </div>
+      </div>
+
+      <!-- ═══════ SCREEN: PROFILE ═══════ -->
+      <div class="screen" id="screen-profile">
+        <div class="screen-title-section">
+          <h1 class="screen-title">Perfil & Identidad</h1>
+          <p class="screen-subtitle">Tu piel · Tus objetivos · Tu historial</p>
+        </div>
+        <div class="profile-header-card">
+          <div class="profile-avatar-lg">AF</div>
+          <div class="profile-data">
+            <p class="profile-name-lg">Alejandro Ferreiro</p>
+            <p class="profile-skin-type">Sensitive Skin · Combination</p>
+            <div class="profile-tags">
+              <span class="ptag">Hydration</span>
+              <span class="ptag">Anti-redness</span>
+              <span class="ptag">Barrier</span>
+            </div>
+          </div>
+        </div>
+        <div class="profile-section">
+          <div class="profile-row"><span class="prow-label">Skin type</span><span class="prow-value">Sensitive combination</span></div>
+          <div class="profile-row"><span class="prow-label">Main goal</span><span class="prow-value">Strengthen skin barrier</span></div>
+          <div class="profile-row"><span class="prow-label">Allergies</span><span class="prow-value">Parfum, Alcohol denat.</span></div>
+          <div class="profile-row"><span class="prow-label">History</span><span class="prow-value">Mild rosacea (2023)</span></div>
+          <div class="profile-row"><span class="prow-label">Patch status</span><span class="prow-value accent-text">MesoPatch v2 · Active</span></div>
+          <div class="profile-row"><span class="prow-label">Firmware</span><span class="prow-value">v3.1.2 · Updated</span></div>
+        </div>
+        <div class="privacy-section">
+          <p class="privacy-title">Privacidad & Consentimiento</p>
+          <div class="privacy-row"><span>Compartir datos con clínica</span>
+            <div class="toggle on" onclick="togglePrivacy(this)">
+              <div class="toggle-knob"></div>
+            </div>
+          </div>
+          <div class="privacy-row"><span>Análisis anónimos Mesoestetic</span>
+            <div class="toggle on" onclick="togglePrivacy(this)">
+              <div class="toggle-knob"></div>
+            </div>
+          </div>
+          <div class="privacy-row"><span>Exportar mis datos</span><button class="btn-export"
+              onclick="showToast('📥 Exportando datos... listo')">Exportar</button></div>
+          <div class="privacy-row delete-row"><span>Eliminar cuenta</span><button class="btn-delete"
+              onclick="showToast('⚠ Contacta con soporte para eliminar la cuenta')">Solicitar</button></div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- BOTTOM NAVIGATION (5 + 1 center) -->
+    <nav class="bottom-nav" id="bottomNav">
+      <button class="nav-item active" id="nav-home" onclick="navigateTo('home')">
+        <div class="nav-icon-wrap">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+            <polyline points="9 22 9 12 15 12 15 22" />
+          </svg>
+        </div>
+        <span>Home</span>
+      </button>
+      <button class="nav-item" id="nav-progress" onclick="navigateTo('progress')">
+        <div class="nav-icon-wrap">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+          </svg>
+        </div>
+        <span>Progress</span>
+      </button>
+      <button class="nav-item nav-item-center" id="nav-scan-center" onclick="navigateTo('scan')">
+        <div class="nav-center-btn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+            <circle cx="11" cy="11" r="8" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            <circle cx="11" cy="11" r="3" stroke-opacity="0.5" />
+          </svg>
+        </div>
+      </button>
+      <button class="nav-item" id="nav-routine" onclick="navigateTo('routine')">
+        <div class="nav-icon-wrap">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="12" cy="12" r="10" />
+            <polyline points="12 6 12 12 16 14" />
+          </svg>
+        </div>
+        <span>Routine</span>
+      </button>
+      <button class="nav-item" id="nav-clinicSync" onclick="navigateTo('clinicSync')">
+        <div class="nav-icon-wrap">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path
+              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.99 12 19.79 19.79 0 0 1 1.93 3.49 2 2 0 0 1 3.9 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9a16 16 0 0 0 6.91 6.91l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+          </svg>
+        </div>
+        <span>Clinic</span>
+      </button>
+    </nav>
+
+    <div class="toast" id="toast"></div>
+  </div>
+
+  <script>
+/**
+ * ═══════════════════════════════════════════════════
+ * MESOPATCH APP v2 — Full Application Logic
+ * PDF-aligned: All 8 modules from "Funciones APP"
+ * Navigation · State · Semaphore · Routine Algo · Chatbot · Charts
+ * ═══════════════════════════════════════════════════
+ */
+'use strict';
+
+/* ═══════════════════════════════════════════════════
+   1. GLOBAL STATE STORE
+════════════════════════════════════════════════════ */
+const Store = (() => {
+  let _state = {
+    patch: {
+      hydration: 72,
+      barrierIntegrity: 54,
+      irritationIndex: 18,
+      sebum: 42,
+      stressCutaneo: 22,
+      absorptionRate: 2.4,
+      absorptionPct: 87,
+      timestamp: new Date(),
+    },
+    faceZones: {
+      forehead: { status: 'green', hydration: 78, barrier: 80, irritation: 10, sensitivity: 12 },
+      'cheek-left': { status: 'yellow', hydration: 51, barrier: 52, irritation: 38, sensitivity: 46 },
+      'cheek-right': { status: 'yellow', hydration: 53, barrier: 56, irritation: 35, sensitivity: 43 },
+      nose: { status: 'red', hydration: 31, barrier: 34, irritation: 68, sensitivity: 75 },
+      chin: { status: 'green', hydration: 81, barrier: 75, irritation: 12, sensitivity: 14 },
+    },
+    currentRoutineTime: 'AM',
+    currentTrend: '24h',
+    resultLevel: 'basic',
+    currentScreen: 'home',
+  };
+
+  const _listeners = new Set();
+  const getState = () => _state;
+  const setState = (p) => { _state = { ..._state, ...p }; _listeners.forEach(f => f(_state)); };
+  const subscribe = (f) => { _listeners.add(f); return () => _listeners.delete(f); };
+
+  function startPatchPolling() {
+    setInterval(() => {
+      const drift = () => (Math.random() - 0.5) * 2.5;
+      const clamp = (v, mn, mx) => Math.round(Math.max(mn, Math.min(mx, v)));
+      const p = { ..._state.patch };
+      p.hydration = clamp(p.hydration + drift(), 0, 100);
+      p.barrierIntegrity = clamp(p.barrierIntegrity + drift(), 0, 100);
+      p.irritationIndex = clamp(p.irritationIndex + drift(), 0, 100);
+      p.sebum = clamp(p.sebum + drift(), 0, 100);
+      p.stressCutaneo = clamp(p.stressCutaneo + drift(), 0, 100);
+      p.absorptionRate = Math.round(Math.max(0.5, Math.min(5, p.absorptionRate + (Math.random() - .5) * .3)) * 10) / 10;
+      p.absorptionPct = clamp(p.absorptionPct + drift() * .4, 40, 99);
+      p.timestamp = new Date();
+      setState({ patch: p });
+    }, 8000);
+  }
+  return { getState, setState, subscribe, startPatchPolling };
+})();
+
+
+/* ═══════════════════════════════════════════════════
+   2. SEMAPHORE LOGIC — All 5 biometrics
+════════════════════════════════════════════════════ */
+const Semaphore = {
+  hydration: v => v >= 65 ? { s: 'green', l: 'ÓPTIMA', c: 'green' } : v >= 40 ? { s: 'yellow', l: 'MODERADA', c: 'yellow' } : { s: 'red', l: 'BAJA', c: 'red' },
+  barrier: v => v >= 70 ? { s: 'green', l: 'ÓPTIMA', c: 'green' } : v >= 45 ? { s: 'yellow', l: 'MODERADA', c: 'yellow' } : { s: 'red', l: 'BAJA', c: 'red' },
+  irritation: v => v <= 20 ? { s: 'green', l: 'BAJA', c: 'green' } : v <= 45 ? { s: 'yellow', l: 'MODERADA', c: 'yellow' } : { s: 'red', l: 'ALTA', c: 'red' },
+  sebum: v => v <= 30 ? { s: 'green', l: 'ÓPTIMO', c: 'green' } : v <= 55 ? { s: 'yellow', l: 'MODERADO', c: 'yellow' } : { s: 'red', l: 'ALTO', c: 'red' },
+  stress: v => v <= 25 ? { s: 'green', l: 'BAJO', c: 'green' } : v <= 50 ? { s: 'yellow', l: 'MODERADO', c: 'yellow' } : { s: 'red', l: 'ALTO', c: 'red' },
+};
+
+
+/* ═══════════════════════════════════════════════════
+   3. ROUTINE ALGORITHM
+════════════════════════════════════════════════════ */
+const ROUTINE_BASE = {
+  AM: [
+    { id: 'a1', name: 'Limpieza suave facial', desc: 'Mesoestetic Cleansing Foam · Temperatura templada', duration: '2 min', adjusted: false },
+    { id: 'a2', name: 'Tónico equilibrante', desc: 'Impulse Toner · pH 5.5 · Con algodón', duration: '1 min', adjusted: false },
+    { id: 'a3', name: 'Sérum barrera activa ✦', desc: 'Hyaluronic Concentrate 2% + Ceramidas', duration: '3 min', adjusted: false },
+    { id: 'a4', name: 'FPS 50+ antiirritante', desc: 'Mesoprotech Melan 130 · Protección solar total', duration: '2 min', adjusted: false },
+    { id: 'a5', name: 'MesoPatch™ · Aplicación', desc: 'Zona de máxima absorción — consultar mapa de Scan', duration: '5 min', adjusted: false },
+  ],
+  PM: [
+    { id: 'p1', name: 'Desmaquillado bifásico', desc: 'Mesoestetic Micellar Water · Doble pasada suave', duration: '2 min', adjusted: false },
+    { id: 'p2', name: 'Exfoliante enzimático ✦', desc: 'OMITIDO: irritación elevada detectada en zona nasal', duration: 'Omitir', adjusted: true },
+    { id: 'p3', name: 'Ampolla reparadora ✦', desc: 'AUMENTADA ×1.5 dosis: barrera moderada en pómulos', duration: '4 min', adjusted: true },
+    { id: 'p4', name: 'Crema reparadora nocturna ✦', desc: 'Cosmelan Maintenance Cream · Capa extra en pómulos', duration: '2 min', adjusted: true },
+    { id: 'p5', name: 'Mascarilla SOS calmante', desc: 'Dermamelan Mask · Zona nasal · 20 min de reposo', duration: '20 min', adjusted: false },
+    { id: 'p6', name: 'MesoPatch™ · Noche', desc: 'Sesión nocturna 8h · Modo Regeneración Activa', duration: 'Toda la noche', adjusted: false },
+  ],
+};
+
+function recalibrateRoutine(steps, patch) {
+  return steps.map(step => {
+    if (patch.irritationIndex > 40 && step.desc.toLowerCase().includes('exfol'))
+      return { ...step, adjusted: true, desc: 'OMITIDO: irritación elevada detectada por el parche' };
+    if (patch.barrierIntegrity < 60 && step.desc.toLowerCase().includes('barrera'))
+      return { ...step, adjusted: true };
+    return step;
+  });
+}
+
+
+/* ═══════════════════════════════════════════════════
+   4. NAVIGATION ENGINE — 7 screens
+════════════════════════════════════════════════════ */
+let _currentScreen = 'home';
+let _screenHistory = [];
+
+// Screens that map to bottom nav items
+const NAV_MAP = { home: 'nav-home', progress: 'nav-progress', scan: 'nav-scan-center', routine: 'nav-routine', clinicSync: 'nav-clinicSync' };
+
+function navigateTo(screenId) {
+  if (screenId === _currentScreen) return;
+  const oldEl = document.getElementById(`screen-${_currentScreen}`);
+  const newEl = document.getElementById(`screen-${screenId}`);
+  if (!oldEl || !newEl) return;
+
+  _screenHistory.push(_currentScreen);
+  oldEl.classList.remove('active');
+  oldEl.classList.add('slide-out');
+  setTimeout(() => oldEl.classList.remove('slide-out'), 300);
+  newEl.classList.add('active');
+  _currentScreen = screenId;
+
+  updateNavBar(screenId);
+  document.getElementById('btnBack').classList.toggle('hidden', screenId === 'home');
+  Store.setState({ currentScreen: screenId });
+  renderScreen(screenId);
+}
+
+function navigateBack() {
+  if (!_screenHistory.length) return;
+  const prev = _screenHistory.pop();
+  const target = prev;
+  // manually switch without pushing to history again
+  const oldEl = document.getElementById(`screen-${_currentScreen}`);
+  const newEl = document.getElementById(`screen-${target}`);
+  if (!oldEl || !newEl) return;
+  oldEl.classList.remove('active');
+  newEl.classList.add('active');
+  _currentScreen = target;
+  updateNavBar(target);
+  document.getElementById('btnBack').classList.toggle('hidden', target === 'home');
+  Store.setState({ currentScreen: target });
+  renderScreen(target);
+}
+
+function updateNavBar(screenId) {
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+  const navId = NAV_MAP[screenId];
+  if (navId) document.getElementById(navId)?.classList.add('active');
+}
+
+
+/* ═══════════════════════════════════════════════════
+   5. SCREEN RENDERERS
+════════════════════════════════════════════════════ */
+function renderScreen(screenId) {
+  if (screenId === 'home') renderHome();
+  else if (screenId === 'scan') renderScan();
+  else if (screenId === 'routine') renderRoutine(Store.getState().currentRoutineTime);
+  else if (screenId === 'progress') renderProgress();
+}
+
+/* ── HOME ──────────────────────────────────────── */
+function renderHome() {
+  const { patch } = Store.getState();
+  // Absorption
+  setEl('absorptionVal', Math.round(patch.absorptionPct));
+  const absBar = document.getElementById('absorptionBar');
+  if (absBar) absBar.style.width = patch.absorptionPct + '%';
+  setEl('absorptionRate', patch.absorptionRate + ' μg/cm²/h · Hace 12 min');
+
+  // All 5 biometrics
+  setBiometric('hydVal', 'hydBar', 'hydBadge', patch.hydration, Semaphore.hydration(patch.hydration));
+  setBiometric('barrVal', 'barrBar', 'barrBadge', patch.barrierIntegrity, Semaphore.barrier(patch.barrierIntegrity));
+  setBiometric('irritVal', 'irritBar', 'irritBadge', patch.irritationIndex, Semaphore.irritation(patch.irritationIndex));
+  setBiometric('sebumVal', 'sebumBar', 'sebumBadge', patch.sebum, Semaphore.sebum(patch.sebum));
+  setBiometric('stressVal', 'stressBar', 'stressBadge', patch.stressCutaneo, Semaphore.stress(patch.stressCutaneo));
+
+  // Alert banner
+  const banner = document.getElementById('alertBanner');
+  if (!banner) return;
+  const iSem = Semaphore.irritation(patch.irritationIndex);
+  const bSem = Semaphore.barrier(patch.barrierIntegrity);
+  if (iSem.s === 'red') {
+    banner.className = 'alert-banner red-alert';
+    banner.querySelector('.alert-title').textContent = '⚠ Irritación alta detectada';
+    banner.querySelector('.alert-body').textContent = 'El parche detecta irritación elevada. Rutina PM ajustada: exfoliante omitido.';
+    banner.style.display = '';
+  } else if (bSem.s !== 'green') {
+    banner.className = 'alert-banner yellow-alert';
+    banner.querySelector('.alert-title').textContent = 'Barrera en zona mejillas';
+    banner.querySelector('.alert-body').textContent = 'Se detectó moderada permeabilidad. Rutina PM ajustada automáticamente.';
+    banner.style.display = '';
+  } else {
+    banner.style.display = 'none';
+  }
+}
+
+function setBiometric(valId, barId, badgeId, value, sem) {
+  const el = document.getElementById(valId);
+  if (el) el.innerHTML = `${Math.round(value)}<small>%</small>`;
+  const barEl = document.getElementById(barId);
+  if (barEl) { barEl.style.width = value + '%'; barEl.style.background = `var(--${sem.c})`; }
+  const bEl = document.getElementById(badgeId);
+  if (bEl) { bEl.textContent = sem.l; bEl.className = `semaphore-badge ${sem.c}`; }
+}
+
+function setEl(id, val) { const el = document.getElementById(id); if (el) el.textContent = val; }
+
+/* ── SCAN ──────────────────────────────────────── */
+function renderScan() {
+  const level = Store.getState().resultLevel;
+  const canvasId = level === 'advanced' ? 'trendChart30' : 'trendChart';
+  drawTrendChart(canvasId, Store.getState().currentTrend);
+}
+
+function setResultLevel(level) {
+  Store.setState({ resultLevel: level });
+  // Update level button states
+  document.querySelectorAll('.level-btn').forEach(b => b.classList.remove('active'));
+  const idMap = { basic: 'lvlBasic', intermediate: 'lvlIntermed', advanced: 'lvlAdvanced' };
+  const btn = document.getElementById(idMap[level]);
+  if (btn) btn.classList.add('active');
+  // Show / hide the correct section
+  document.querySelectorAll('.scan-level-section').forEach(s => s.classList.remove('active'));
+  const sectionMap = { basic: 'scan-basic', intermediate: 'scan-medium', advanced: 'scan-advanced' };
+  const section = document.getElementById(sectionMap[level]);
+  if (section) section.classList.add('active');
+  // Render chart for the visible section
+  if (level === 'intermediate') drawTrendChart('trendChart', '24h');
+  if (level === 'advanced') drawTrendChart('trendChart30', '30d');
+}
+
+function setTrend(btn, period) {
+  Store.setState({ currentTrend: period });
+  document.querySelectorAll('.trend-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  // Draw on whichever canvas is visible
+  const level = Store.getState().resultLevel;
+  const canvasId = level === 'advanced' ? 'trendChart30' : 'trendChart';
+  drawTrendChart(canvasId, period);
+}
+
+function drawTrendChart(canvasId, period) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  canvas.width = canvas.offsetWidth || 300;
+  canvas.height = canvas.offsetHeight || 100;
+  const W = canvas.width, H = canvas.height;
+  ctx.clearRect(0, 0, W, H);
+
+  // Data sets per period
+  const DATA = {
+    '24h': {
+      hydration: [62, 65, 67, 69, 70, 71, 72, 72],
+      barrier: [48, 50, 51, 52, 53, 53, 54, 54],
+      irritation: [28, 25, 24, 22, 20, 19, 18, 18],
+    },
+    '7d': {
+      hydration: [54, 58, 61, 64, 67, 69, 71, 72],
+      barrier: [40, 43, 46, 49, 51, 52, 53, 54],
+      irritation: [38, 34, 30, 27, 24, 21, 19, 18],
+    },
+    '30d': {
+      hydration: [44, 48, 52, 56, 60, 64, 68, 72],
+      barrier: [30, 35, 38, 42, 46, 49, 52, 54],
+      irritation: [55, 50, 44, 38, 33, 28, 23, 18],
+    },
+  };
+
+  const d = DATA[period] || DATA['24h'];
+  const COLORS = { hydration: '#22C55E', barrier: '#D97706', irritation: '#DC2626' };
+  const pts = d.hydration.length;
+
+  function drawLine(values, color) {
+    const max = 100, min = 0;
+    const pad = 12;
+    ctx.beginPath();
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 2;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    values.forEach((v, i) => {
+      const x = pad + (i / (pts - 1)) * (W - pad * 2);
+      const y = H - pad - ((v - min) / (max - min)) * (H - pad * 2);
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    });
+    ctx.stroke();
+    // Glow
+    ctx.shadowColor = color;
+    ctx.shadowBlur = 6;
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+  }
+
+  drawLine(d.hydration, COLORS.hydration);
+  drawLine(d.barrier, COLORS.barrier);
+  drawLine(d.irritation, COLORS.irritation);
+
+  // Grid lines
+  ctx.strokeStyle = 'rgba(196,163,90,0.2)';
+  ctx.lineWidth = 0.5;
+  [25, 50, 75].forEach(pct => {
+    const y = 12 + ((100 - pct) / 100) * (H - 24);
+    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+  });
+}
+
+/* ── ROUTINE ───────────────────────────────────── */
+function renderRoutine(time) {
+  const { patch } = Store.getState();
+  const steps = recalibrateRoutine(ROUTINE_BASE[time], patch);
+  const container = document.getElementById('routineSteps');
+  if (!container) return;
+  container.innerHTML = '';
+  steps.forEach((step, idx) => {
+    const isOmit = step.duration === 'Omitir';
+    const el = document.createElement('div');
+    el.className = 'routine-step' + (step.adjusted ? ' adjusted' : '');
+    el.style.animationDelay = `${idx * 0.07}s`;
+    el.innerHTML = `
+      <div class="step-number" style="${isOmit ? 'background:var(--red-dim);color:var(--red)' : ''}">
+        ${isOmit ? '✕' : idx + 1}
+      </div>
+      <div class="step-content">
+        <p class="step-name">
+          ${step.name.replace(' ✦', '')}
+          ${step.adjusted ? '<span class="step-adjusted-tag">✦ AJUSTADO IA</span>' : ''}
+        </p>
+        <p class="step-desc" style="${isOmit ? 'color:var(--red);opacity:0.8' : ''}">${step.desc}</p>
+      </div>
+      <span class="step-duration" style="${isOmit ? 'color:var(--red)' : ''}">${step.duration}</span>
+    `;
+    container.appendChild(el);
+  });
+
+  const tag = document.getElementById('routineAlertTag');
+  if (tag) {
+    const adj = steps.filter(s => s.adjusted).length;
+    tag.style.display = adj > 0 ? '' : 'none';
+    if (adj > 0) tag.innerHTML = `<span class="alert-indicator yellow-pulse"></span>${adj} paso${adj > 1 ? 's' : ''} ajustado${adj > 1 ? 's' : ''} automáticamente`;
+  }
+}
+
+/* ── PROGRESS ──────────────────────────────────── */
+function renderProgress() {
+  drawTrendChart('weeklyChart', '7d');
+}
+
+
+/* ═══════════════════════════════════════════════════
+   6. FACE ZONE INTERACTION
+════════════════════════════════════════════════════ */
+const ZONE_DATA = {
+  forehead: { name: '🟢 Frente', color: 'var(--green)', status: 'ÓPTIMA', hydration: 78, barrier: 80, irritation: 10 },
+  'cheek-left': { name: '🟡 Pómulo Izquierdo', color: 'var(--yellow)', status: 'MODERADA', hydration: 51, barrier: 52, irritation: 38 },
+  'cheek-right': { name: '🟡 Pómulo Derecho', color: 'var(--yellow)', status: 'MODERADA', hydration: 53, barrier: 56, irritation: 35 },
+  nose: { name: '🔴 Zona Nasal', color: 'var(--red)', status: 'ALTA SENSIB.', hydration: 31, barrier: 34, irritation: 68 },
+  chin: { name: '🟢 Mentón', color: 'var(--green)', status: 'ÓPTIMA', hydration: 81, barrier: 75, irritation: 12 },
+};
+
+function zoneClick(el) { showZoneDetail(el.dataset.zone); }
+
+function showZoneDetail(zoneId) {
+  const z = ZONE_DATA[zoneId];
+  if (!z) return;
+  const panel = document.getElementById('zoneDetail');
+  if (!panel) return;
+  const css = z.status === 'ÓPTIMA' ? 'green' : z.status === 'ALTA SENSIB.' ? 'red' : 'yellow';
+  panel.innerHTML = `
+    <div class="zone-detail-content">
+      <div class="zone-detail-header">
+        <span class="zone-detail-name" style="color:${z.color}">${z.name}</span>
+        <span class="semaphore-badge ${css}">${z.status}</span>
+      </div>
+      <div class="zone-metrics-row">
+        <div class="zone-metric"><span style="color:var(--accent)">${z.hydration}%</span>Hidratación</div>
+        <div class="zone-metric"><span style="color:var(--yellow)">${z.barrier}%</span>Barrera</div>
+        <div class="zone-metric"><span style="color:${z.irritation > 45 ? 'var(--red)' : 'var(--green)'}">${z.irritation}%</span>Irritación</div>
+      </div>
+    </div>
+  `;
+}
+
+
+/* ═══════════════════════════════════════════════════
+   7. AM/PM TOGGLE
+════════════════════════════════════════════════════ */
+function switchRoutine(time) {
+  Store.setState({ currentRoutineTime: time });
+  document.getElementById('btnAM').classList.toggle('active', time === 'AM');
+  document.getElementById('btnPM').classList.toggle('active', time === 'PM');
+  renderRoutine(time);
+}
+
+
+/* ═══════════════════════════════════════════════════
+   8. AI CHATBOT
+════════════════════════════════════════════════════ */
+const AI_RESPONSES = {
+  '¿Por qué está baja mi barrera?': 'Tu barrera cutánea (54%) está moderadamente comprometida. Esto puede deberse a la exposición ambiental o al tratamiento activo. El parche ha detectado permeabilidad elevada en pómulos. 💡 Recomiendo aplicar doble capa de la ampolla reparadora esta noche.',
+  '¿Puedo usar exfoliante hoy?': 'No recomiendo el exfoliante hoy. Tu irritación (18%) es manejable, pero la barrera en pómulos está al 54%. He ajustado tu rutina PM para omitir la exfoliación hasta que la barrera supere el 65%. ✅',
+  'Explícame la irritación nasal': 'La zona nasal muestra 68% de irritación — nivel alto. Esto es común en pieles sensibles con pilosebáceas activas. Tu parche ha detectado mayor permeabilidad en esta zona. La mascarilla SOS PM + evitar activos exfoliantes durante 5 días resolverá esto.',
+  'default': 'Basándome en tus datos del parche de hoy, todo indica que el tratamiento avanza correctamente. ¿Tienes alguna otra pregunta sobre tus métricas o rutina? Estoy aquí para ayudarte 🩹',
+};
+
+function sendQuickQ(btn, question) {
+  btn.disabled = true;
+  btn.style.opacity = '0.5';
+  addChatMsg(question, 'user');
+  setTimeout(() => {
+    const resp = AI_RESPONSES[question] || AI_RESPONSES.default;
+    addChatMsg(resp, 'ai');
+  }, 800);
+}
+
+function sendChatMsg() {
+  const input = document.getElementById('chatInput');
+  if (!input || !input.value.trim()) return;
+  const q = input.value.trim();
+  input.value = '';
+  addChatMsg(q, 'user');
+  setTimeout(() => {
+    const resp = AI_RESPONSES[q] || AI_RESPONSES.default;
+    addChatMsg(resp, 'ai');
+  }, 1000);
+}
+
+function addChatMsg(text, role) {
+  const msgs = document.getElementById('chatMessages');
+  if (!msgs) return;
+  const now = new Date();
+  const time = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+  if (role === 'user') {
+    const el = document.createElement('div');
+    el.className = 'chat-msg user-msg';
+    el.innerHTML = `<div class="chat-bubble user-bubble">${text}<span class="bubble-time">${time}</span></div>`;
+    msgs.appendChild(el);
+  } else {
+    const el = document.createElement('div');
+    el.className = 'chat-msg system';
+    el.innerHTML = `
+      <div class="chat-avatar-ai">🩹</div>
+      <div class="chat-bubble">${text}<span class="bubble-time">${time}</span></div>
+    `;
+    msgs.appendChild(el);
+  }
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+
+/* ═══════════════════════════════════════════════════
+   9. CLINIC / INVENTORY / PROFILE HANDLERS
+════════════════════════════════════════════════════ */
+function showMessageSent() { showToast('✉ Mensaje enviado al Dr. Ramírez'); }
+function generateReport() {
+  showToast('📊 Generando informe PDF...');
+  setTimeout(() => showToast('✅ Informe listo · Compartido con la clínica'), 2000);
+}
+function openReport(el) { showToast(`📄 Abriendo: ${el.querySelector('.report-title').textContent.slice(0, 28)}…`); }
+
+function playTutorial(el, id) {
+  const titles = { limpieza: 'Técnica de limpieza', ampolla: 'Aplicación ampolla reparadora', parche: 'Colocación MesoPatch™' };
+  showToast(`▶ Reproduciendo: ${titles[id] || 'Tutorial'}`);
+}
+
+function togglePrivacy(el) { el.classList.toggle('on'); }
+
+
+/* ═══════════════════════════════════════════════════
+   10. TOAST SYSTEM
+════════════════════════════════════════════════════ */
+let _toastTimeout;
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  if (!toast) return;
+  clearTimeout(_toastTimeout);
+  toast.textContent = msg;
+  toast.classList.add('show');
+  _toastTimeout = setTimeout(() => toast.classList.remove('show'), 2800);
+}
+
+
+/* ═══════════════════════════════════════════════════
+   11. REACTIVE STORE SUBSCRIPTION
+════════════════════════════════════════════════════ */
+Store.subscribe(state => {
+  if (state.currentScreen === 'home') renderHome();
+});
+
+
+/* ═══════════════════════════════════════════════════
+   12. INITIALISATION
+════════════════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', () => {
+  // Live clock
+  const updateClock = () => {
+    const n = new Date();
+    const t = `${String(n.getHours()).padStart(2, '0')}:${String(n.getMinutes()).padStart(2, '0')}`;
+    setEl('statusTime', t);
+  };
+  updateClock();
+  setInterval(updateClock, 30000);
+
+  // Date
+  const d = new Date();
+  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  setEl('greetingDate', `${days[d.getDay()]}, ${d.getDate()} ${months[d.getMonth()]} · Session 3/8`);
+
+  // Render initial screen
+  renderHome();
+
+  // Animate bars on load
+  setTimeout(() => {
+    document.querySelectorAll('.metric-bar, .absorption-bar, .session-progress-fill, .product-stock-fill').forEach(el => {
+      const w = el.style.width;
+      el.style.width = '0%';
+      requestAnimationFrame(() => setTimeout(() => { el.style.width = w; }, 50));
+    });
+  }, 200);
+
+  // Start live biometric polling
+  Store.startPatchPolling();
+
+  console.log('%c🩹 MesoPatch App v2 — Aligned with "Funciones APP" PDF', 'color:#00C6FF;font-weight:bold;font-size:14px');
+  console.log('%cModules: Dashboard · Skin Scan · Intelligent Routine · Video Tutorials · Progress & History · Smart Inventory · AI Chatbot · Clinic Sync B2B2C · Profile', 'color:#8A9BB5;font-size:11px');
+});
+
+</script>
+</body>
+
+</html>
